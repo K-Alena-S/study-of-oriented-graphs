@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/button_default_color" />
+    <item android:state_pressed="true" android:drawable="@color/button_pressed_color" />
+    <item android:drawable="@color/button_default_color" />
+    <corners android:radius="50dp" />
+</shape>
