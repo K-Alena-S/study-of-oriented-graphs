@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.study_of_oriented_graph.FirstFragment"
+        android:name="com.example.study_of_oriented_graph.interfaces.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.study_of_oriented_graph.SecondFragment"
+        android:name="com.example.study_of_oriented_graph.interfaces.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
@@ -30,7 +30,35 @@
     </fragment>
     <fragment
         android:id="@+id/ThirdFragment"
-        android:name="com.example.study_of_oriented_graph.ThirdFragment"
+        android:name="com.example.study_of_oriented_graph.interfaces.ThirdFragment"
         android:label="fragment_third"
-        tools:layout="@layout/fragment_third" />
+        tools:layout="@layout/fragment_third" >
+        <action
+            android:id="@+id/action_ThirdFragment_to_FourthOneFragment"
+            app:destination="@id/FourthOneFragment">
+            <argument
+                android:name="buttonText"
+                app:argType="string" />
+            </action>
+        <action
+            android:id="@+id/action_ThirdFragment_to_FourthTwoFragment"
+            app:destination="@id/FourthTwoFragment">
+            <argument
+                android:name="buttonText"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_ThirdFragment_to_FourthTwoFragment2"
+            app:destination="@id/FourthTwoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/FourthOneFragment"
+        android:name="com.example.study_of_oriented_graph.interfaces.FourthOneFragment"
+        android:label="fragment_fourth_one"
+        tools:layout="@layout/fragment_fourth_one" />
+    <fragment
+        android:id="@+id/FourthTwoFragment"
+        android:name="com.example.study_of_oriented_graph.interfaces.FourthTwoFragment"
+        android:label="fragment_fourth_two"
+        tools:layout="@layout/fragment_fourth_two" />
 </navigation>

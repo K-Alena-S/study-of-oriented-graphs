@@ -1,10 +1,11 @@
-package com.example.study_of_oriented_graph
+package com.example.study_of_oriented_graph.interfaces
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.study_of_oriented_graph.R
 
 class ButtonAdapter(
     private val buttons: MutableList<Int>,

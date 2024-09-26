@@ -1,4 +1,4 @@
-package com.example.study_of_oriented_graph
+package com.example.study_of_oriented_graph.interfaces
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.study_of_oriented_graph.R
 import com.example.study_of_oriented_graph.databinding.FragmentSecondBinding
 
 
