@@ -55,10 +55,19 @@
         android:id="@+id/FourthOneFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.FourthOneFragment"
         android:label="fragment_fourth_one"
-        tools:layout="@layout/fragment_fourth_one" />
+        tools:layout="@layout/fragment_fourth_one" >
+        <action
+            android:id="@+id/action_FourthOneFragment_to_FifthOneFragment"
+            app:destination="@id/FifthOneFragment" />
+    </fragment>
     <fragment
         android:id="@+id/FourthTwoFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.FourthTwoFragment"
         android:label="fragment_fourth_two"
         tools:layout="@layout/fragment_fourth_two" />
+    <fragment
+        android:id="@+id/FifthOneFragment"
+        android:name="com.example.study_of_oriented_graph.interfaces.FifthOneFragment"
+        android:label="fragment_fifth_one"
+        tools:layout="@layout/fragment_fifth_one" />
 </navigation>

@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.study_of_oriented_graph.R
 import com.example.study_of_oriented_graph.databinding.FragmentFourthOneBinding
 
 class FourthOneFragment : Fragment() {
@@ -22,21 +24,24 @@ class FourthOneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val buttonText = arguments?.getString("buttonText")
+
         // Инициализация элементов интерфейса
         binding.buttonZeidelMatrix.setOnClickListener {
-            // Обработка нажатия на кнопку "Матрица Зейделя"
-            // Отображение полей ввода для матрицы Зейделя
+            if (buttonText != null) {
+                navigateToFourthOneToFifthOneFragment(buttonText)
+            }
         }
 
         binding.buttonCirculantVector.setOnClickListener {
-            // Обработка нажатия на кнопку "Вектор циркулянта"
-            // Отображение полей ввода для вектора циркулянта
-        }
 
-//        binding.buttonSubmit.setOnClickListener {
-//            // Обработка нажатия на кнопку "Отправить"
-//            // Получение введенных данных и передача их обратно в ThirdFragment
-//        }
+        }
+    }
+
+    private fun navigateToFourthOneToFifthOneFragment(buttonText: String) {
+        val bundle = Bundle()
+        bundle.putString("buttonText", buttonText)
+        findNavController().navigate(R.id.action_FourthOneFragment_to_FifthOneFragment, bundle)
     }
 
     override fun onDestroyView() {
