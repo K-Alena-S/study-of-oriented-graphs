@@ -40,19 +40,7 @@ class SecondFragment : Fragment() {
         }
         binding.recyclerView.adapter = buttonAdapter
 
-        // Устанавливаем LayoutManager в зависимости от ориентации экрана
-        val orientation = resources.configuration.orientation
-        binding.recyclerView.layoutManager = when (orientation) {
-            Configuration.ORIENTATION_PORTRAIT -> {
-                GridLayoutManager(requireContext(), 4)
-            }
-            Configuration.ORIENTATION_LANDSCAPE -> {
-                GridLayoutManager(requireContext(), 8)
-            }
-            else -> {
-                GridLayoutManager(requireContext(), 4)
-            }
-        }
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), resources.getInteger(R.integer.count))
     }
 
     private fun navigateToThirdFragment(buttonText: String) {
@@ -60,7 +48,6 @@ class SecondFragment : Fragment() {
         bundle.putString("buttonText", buttonText)
         findNavController().navigate(R.id.action_SecondFragment_to_ThirdFragment, bundle)
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
