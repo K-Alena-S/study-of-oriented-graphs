@@ -25,8 +25,15 @@ class ThirdFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val buttonText = arguments?.getString("buttonText")
-        binding.textView.text = "Выбрано $buttonText вершин"
+        val buttonText =  arguments?.getString("buttonText")
+
+        binding.textView.text = when (buttonText) {
+            "21" -> "$buttonText вершина"
+            "22" -> "$buttonText вершины"
+            "23" -> "$buttonText вершины"
+            "24" -> "$buttonText вершины"
+            else -> "$buttonText вершин"
+        }
 
         binding.buttonEnterMatrix.setOnClickListener {
             val fourthFragment = FourthOneFragment()
