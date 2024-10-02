@@ -59,6 +59,9 @@
         <action
             android:id="@+id/action_FourthOneFragment_to_FifthOneFragment"
             app:destination="@id/FifthOneFragment" />
+        <action
+            android:id="@+id/action_FourthOneFragment_to_FifthTwoFragment"
+            app:destination="@id/FifthTwoFragment" />
     </fragment>
     <fragment
         android:id="@+id/FourthTwoFragment"
@@ -69,5 +72,23 @@
         android:id="@+id/FifthOneFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.FifthOneFragment"
         android:label="fragment_fifth_one"
-        tools:layout="@layout/fragment_fifth_one" />
+        tools:layout="@layout/fragment_fifth_one" >
+        <action
+            android:id="@+id/action_FifthOneFragment_to_sixthFragment2"
+            app:destination="@id/SixthFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SixthFragment"
+        android:name="com.example.study_of_oriented_graph.interfaces.SixthFragment"
+        android:label="fragment_sixth"
+        tools:layout="@layout/fragment_sixth" />
+    <fragment
+        android:id="@+id/FifthTwoFragment"
+        android:name="com.example.study_of_oriented_graph.interfaces.FifthTwoFragment"
+        android:label="fragment_fifth_two"
+        tools:layout="@layout/fragment_fifth_two" >
+        <action
+            android:id="@+id/action_fifthTwoFragment_to_sixthFragment"
+            app:destination="@id/SixthFragment" />
+    </fragment>
 </navigation>

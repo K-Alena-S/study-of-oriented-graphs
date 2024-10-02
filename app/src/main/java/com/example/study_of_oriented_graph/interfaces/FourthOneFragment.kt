@@ -44,6 +44,12 @@ class FourthOneFragment : Fragment() {
         findNavController().navigate(R.id.action_FourthOneFragment_to_FifthOneFragment, bundle)
     }
 
+    private fun navigateToFourthOneToFifthTwoFragment(buttonText: String) {
+        val bundle = Bundle()
+        bundle.putString("buttonText", buttonText)
+        findNavController().navigate(R.id.action_FourthOneFragment_to_FifthTwoFragment, bundle)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
