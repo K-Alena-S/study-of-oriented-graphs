@@ -11,7 +11,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
-        android:hint="Введите первую строку матрицы Зейделя, задающую циркулянтную ориентацию"
+        android:hint="Введите первую строку матрицы Зейделя, задающую циркулянтную ориентацию \n\n
+        Пример: \n
+        0, -1, -1, 1, 0, -1, 1, 1"
         android:inputType="textMultiLine"
         android:gravity="top|start"
         android:background="@android:color/white"

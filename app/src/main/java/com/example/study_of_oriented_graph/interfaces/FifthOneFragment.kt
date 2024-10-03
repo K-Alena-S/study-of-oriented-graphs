@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.navigation.fragment.findNavController
 import com.example.study_of_oriented_graph.R
 
 class FifthOneFragment : Fragment() {
 
     private lateinit var matrixInput: EditText
     private lateinit var nextButton: Button
-    private var matrix: Array<IntArray>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,27 +23,19 @@ class FifthOneFragment : Fragment() {
         matrixInput = view.findViewById(R.id.matrixInput)
         nextButton = view.findViewById(R.id.nextButton)
 
-        nextButton.setOnClickListener {
-            parseMatrixInput()
-        }
-
         return view
     }
 
-    private fun parseMatrixInput() {
-        val input = matrixInput.text.toString().trim()
-        if (input.isNotEmpty()) {
-            val rows = input.split("\n")
-            val matrixList = mutableListOf<IntArray>()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-            for (row in rows) {
-                val values = row.split(",").map { it.trim().toIntOrNull() ?: 0 }
-                matrixList.add(values.toIntArray())
-            }
-
-            matrix = matrixList.toTypedArray()
-            // Теперь матрица сохранена в переменной matrix
-            // Здесь можно выполнить любые действия по обработке матрицы
+        nextButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("matrixString", matrixInput.text.toString())
+            val buttonText = arguments?.getString("buttonText")
+            bundle.putString("buttonText", buttonText)
+            findNavController().navigate(R.id.action_FifthOneFragment_to_SixthFragment, bundle)
         }
     }
+
 }

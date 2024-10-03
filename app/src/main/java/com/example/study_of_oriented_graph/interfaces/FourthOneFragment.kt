@@ -34,7 +34,9 @@ class FourthOneFragment : Fragment() {
         }
 
         binding.buttonCirculantVector.setOnClickListener {
-
+            if (buttonText != null) {
+                navigateToFourthOneToFifthTwoFragment(buttonText)
+            }
         }
     }
 

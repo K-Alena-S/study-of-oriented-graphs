@@ -11,7 +11,16 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
-        android:hint="Введите матрицу (строки через перевод строки)"
+        android:hint="Введите матрицу (строки через перевод строки)\n
+        Пример: \n
+        0, -1, -1, -1, 1, 1, 1\n
+        1, 0, -1, -1, -1, 1, 1\n
+        1, 1, 0, -1, 1, -1, -1\n
+        1, 1, 1, 0, -1, -1, -1\n
+        -1, 1, -1, 1, 0, -1, 1\n
+        -1, -1, 1, 1, 1, 0, -1\n
+        -1, -1, 1, 1, -1, 1, 0"
+
         android:inputType="textMultiLine"
         android:gravity="top|start"
         android:background="@android:color/white"

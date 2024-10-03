@@ -74,21 +74,47 @@
         android:label="fragment_fifth_one"
         tools:layout="@layout/fragment_fifth_one" >
         <action
-            android:id="@+id/action_FifthOneFragment_to_sixthFragment2"
+            android:id="@+id/action_FifthOneFragment_to_SixthFragment"
             app:destination="@id/SixthFragment" />
     </fragment>
     <fragment
         android:id="@+id/SixthFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.SixthFragment"
         android:label="fragment_sixth"
-        tools:layout="@layout/fragment_sixth" />
+        tools:layout="@layout/fragment_sixth" >
+        <action
+            android:id="@+id/action_SixthFragment_to_SeventhFragment"
+            app:destination="@id/SeventhFragment" />
+    </fragment>
     <fragment
         android:id="@+id/FifthTwoFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.FifthTwoFragment"
         android:label="fragment_fifth_two"
         tools:layout="@layout/fragment_fifth_two" >
         <action
-            android:id="@+id/action_fifthTwoFragment_to_sixthFragment"
+            android:id="@+id/action_FifthTwoFragment_to_SixthFragment"
             app:destination="@id/SixthFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/SeventhFragment"
+        android:name="com.example.study_of_oriented_graph.interfaces.SeventhFragment"
+        android:label="fragment_seventh"
+        tools:layout="@layout/fragment_seventh" >
+        <action
+            android:id="@+id/action_SeventhFragment_to_AntiContourFragment"
+            app:destination="@id/AntiContourFragment" />
+        <action
+            android:id="@+id/action_SeventhFragment_to_СontourFragment2"
+            app:destination="@id/СontourFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/СontourFragment"
+        android:name="com.example.study_of_oriented_graph.interfaces.ContourFragment"
+        android:label="fragment_contour"
+        tools:layout="@layout/fragment_contour" />
+    <fragment
+        android:id="@+id/AntiContourFragment"
+        android:name="com.example.study_of_oriented_graph.interfaces.AntiContourFragment"
+        android:label="fragment_anticontour"
+        tools:layout="@layout/fragment_anticontour" />
 </navigation>
