@@ -26,13 +26,13 @@ class SixthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val matrixString = arguments?.getString("matrixString").orEmpty()
-        val buttonText = arguments?.getString("buttonText").orEmpty()
+        val vertices = arguments?.getString("buttonText").orEmpty()
 
         binding.buttonCont.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("matrixString", matrixString)
             bundle.putString("characteristics", "cont")
-            bundle.putString("buttonText", buttonText)
+            bundle.putString("vertices", vertices)
             findNavController().navigate(R.id.action_SixthFragment_to_SeventhFragment, bundle)
         }
 
@@ -40,7 +40,7 @@ class SixthFragment : Fragment() {
             val bundle = Bundle()
             bundle.putString("matrixString", matrixString)
             bundle.putString("characteristics", "anticont")
-            bundle.putString("buttonInt", buttonText)
+            bundle.putString("vertices", vertices)
             findNavController().navigate(R.id.action_SixthFragment_to_SeventhFragment, bundle)
         }
 

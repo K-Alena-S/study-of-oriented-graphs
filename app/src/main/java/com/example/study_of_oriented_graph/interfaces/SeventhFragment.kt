@@ -41,9 +41,9 @@ class SeventhFragment : Fragment() {
         val seekBar2ValueText: TextView = view.findViewById(R.id.seekBar2Value)
 
         // Получаем аргументы
-        val buttonText = arguments?.getString("buttonText")?.toIntOrNull() ?: 30
-        seekBar1.max = buttonText
-        seekBar2.max = buttonText
+        val vertices = arguments?.getString("vertices")?.toIntOrNull() ?: 30
+        seekBar1.max = vertices
+        seekBar2.max = vertices
 
         seekBar1.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             @RequiresApi(Build.VERSION_CODES.O)
@@ -73,10 +73,10 @@ class SeventhFragment : Fragment() {
         val matrixString = arguments?.getString("matrixString")
 
         binding.buttonSave.setOnClickListener {
-            val buttonInt = arguments?.getString("buttonInt")
+            val vertices = arguments?.getString("vertices")
             val bundle = Bundle()
             bundle.putString("matrixString", matrixString)
-            bundle.putString("buttonText", buttonInt)
+            bundle.putString("vertices", vertices)
             bundle.putInt("seekBar1", seekBar1Value)
             bundle.putInt("seekBar2", seekBar2Value)
 
