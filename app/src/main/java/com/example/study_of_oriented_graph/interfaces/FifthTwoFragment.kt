@@ -13,7 +13,6 @@ import com.example.study_of_oriented_graph.R
 class FifthTwoFragment : Fragment() {
     private lateinit var matrixInput: EditText
     private lateinit var nextButton: Button
-    private var matrixString: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,29 +30,36 @@ class FifthTwoFragment : Fragment() {
 
         nextButton.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("matrixString", matrixInput.text.toString())
+            val matrix = generateMatrix(matrixInput.text.toString())
+            val matrixStr = matrixToString(matrix)
+            bundle.putString("matrixString", matrixStr)
             val buttonText = arguments?.getString("buttonText")
             bundle.putString("buttonText", buttonText)
             findNavController().navigate(R.id.action_FifthTwoFragment_to_SixthFragment, bundle)
         }
     }
 
-    private fun createMatrix(input: String): String {
-        val numbers = input.split(",").map { it.trim().toInt() }
-        val size = numbers.size
-        val result = Array(size) { IntArray(size) }
+    private fun generateMatrix(matrixString: String): Array<IntArray> {
+        // Преобразование входной строки в массив чисел
+        val values = matrixString.split(",").map { it.trim().toInt() }.toIntArray()
 
-        matrixString = ""
+        // Инициализация двумерного массива
+        val size = values.size
+        val matrix = Array(size) { IntArray(size) }
+
+        // Заполнение двумерного массива сдвигами
         for (i in 0 until size) {
-
-            var str = ""
             for (j in 0 until size) {
-                result[i][j] = numbers[(j + i) % size]
-                str += (result[i][j].toString() + ", ")
+                matrix[i][j] = values[(j - i + size) % size]
             }
-            matrixString += str + "\n"
         }
-
-        return matrixString as String
+        return matrix
     }
+
+    private fun matrixToString(matrix: Array<IntArray>): String {
+        return matrix.joinToString("\n") { row ->
+            row.joinToString(", ") { it.toString() }
+        }
+    }
+
 }

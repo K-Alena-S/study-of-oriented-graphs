@@ -1,5 +1,6 @@
 package com.example.study_of_oriented_graph.interfaces
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.study_of_oriented_graph.R
+import com.example.study_of_oriented_graph.databinding.FragmentSeventhBinding
 
 
 class SeventhFragment : Fragment() {
@@ -16,11 +20,16 @@ class SeventhFragment : Fragment() {
     private var seekBar1Value: Int = 0
     private var seekBar2Value: Int = 0
 
+    private var _binding: FragmentSeventhBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_seventh, container, false)
+    ): View {
+
+        _binding = FragmentSeventhBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +39,6 @@ class SeventhFragment : Fragment() {
         val seekBar1ValueText: TextView = view.findViewById(R.id.seekBar1Value)
         val seekBar2: SeekBar = view.findViewById(R.id.seekBar2)
         val seekBar2ValueText: TextView = view.findViewById(R.id.seekBar2Value)
-        val buttonSave: Button = view.findViewById(R.id.button_save)
 
         // Получаем аргументы
         val buttonText = arguments?.getString("buttonText")?.toIntOrNull() ?: 30
@@ -38,8 +46,10 @@ class SeventhFragment : Fragment() {
         seekBar2.max = buttonText
 
         seekBar1.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 seekBar1Value = progress
+                seekBar2.min = seekBar1Value
                 seekBar1ValueText.text = "От: $seekBar1Value"
             }
 
@@ -59,16 +69,23 @@ class SeventhFragment : Fragment() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
-        buttonSave.setOnClickListener {
+        val characteristics = arguments?.getString("characteristics")
+        val matrixString = arguments?.getString("matrixString")
 
-            // Здесь можно использовать значения seekBar1Value и seekBar2Value
+        binding.buttonSave.setOnClickListener {
+            val buttonInt = arguments?.getString("buttonInt")
+            val bundle = Bundle()
+            bundle.putString("matrixString", matrixString)
+            bundle.putString("buttonText", buttonInt)
+            bundle.putInt("seekBar1", seekBar1Value)
+            bundle.putInt("seekBar2", seekBar2Value)
 
-            // val sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-            // with(sharedPreferences.edit()) {
-            //     putInt("seekBar1", seekBar1Value)
-            //     putInt("seekBar2", seekBar2Value)
-            //     apply()
-            // }
+            if (characteristics == "cont") {
+                findNavController().navigate(R.id.action_SeventhFragment_to_СontourFragment, bundle)
+            }
+            else if (characteristics == "anticont") {
+                findNavController().navigate(R.id.action_SeventhFragment_to_AntiContourFragment, bundle)
+            }
         }
     }
 }
