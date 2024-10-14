@@ -28,10 +28,13 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val buttonData = mutableListOf<ButtonData>()
         // Создаем список данных для кнопок
-        val buttonData = mutableListOf<Int>()
+//        val buttonData = mutableListOf<Int>()
         for (i in 5..28) {
-            buttonData.add(i)
+            buttonData.add(ButtonData("$i",
+                "https://serpapi.com/searches/670c8387dc969fa6c6682c81/images/7bdc27dcafec9d74a9e0e02318af33aa88146379e3ff9243bb52fa42cf0e9b4d.jpeg"))
+//            buttonData.add(i)
         }
 
         // Создаем адаптер и устанавливаем его в RecyclerView
