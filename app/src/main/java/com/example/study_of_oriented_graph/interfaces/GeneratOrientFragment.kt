@@ -4,39 +4,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.study_of_oriented_graph.R
 
 class GeneratOrientFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: SelectedItemsAdapter
-    private var selectedItems: ArrayList<Int>? = null
+    var selectedItems: ArrayList<Int>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_generat_orient, container, false)
+        val view = inflater.inflate(R.layout.fragment_generat_orient, container, false)
+        selectedItems = arguments?.getIntegerArrayList("selectedItems")
+
+        return view
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Получение списка выбранных элементов
+        val textView: TextView = view.findViewById(R.id.text_view_orient)
+
+        textView.text = selectedItems?.joinToString(", ") ?: "Нет выбранных элементов"
+
         selectedItems = arguments?.getIntegerArrayList("selectedItems")
 
-        // Настройка RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerView_selected)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        var strText = "Выбранные дистанции: "
 
-        // Инициализация адаптера с выбранными элементами
-        adapter = SelectedItemsAdapter(selectedItems ?: arrayListOf())
-        recyclerView.adapter = adapter
+        for (i in selectedItems!!){
+             strText += "$i "
+        }
 
-        // Дополнительная настройка интерфейса, если необходимо
+        textView.text = strText
     }
+
 }

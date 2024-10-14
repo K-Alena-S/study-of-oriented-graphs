@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.study_of_oriented_graph.R
@@ -15,7 +15,6 @@ class FourthTwoFragment : Fragment()  {
 
     private var _binding: FragmentFourthTwoBinding? = null
     private val binding get() = _binding!!
-    private lateinit var CheckText: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,20 +50,12 @@ class FourthTwoFragment : Fragment()  {
         binding.nextButton.setOnClickListener {
             val selectedItems = adapter.getCheckedItems()
 
-            // Передаем данные в следующий фрагмент
-            val nextFragment = GeneratOrientFragment()
             val bundle = Bundle()
             bundle.putIntegerArrayList("selectedItems", ArrayList(selectedItems))
-            nextFragment.arguments = bundle
 
-            // Переход к следующему фрагменту
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.action_FourthTwoFragment_to_GeneratOrientFragment, nextFragment)
-                .addToBackStack(null)
-                .commit()
+            findNavController().navigate(R.id.action_FourthTwoFragment_to_GeneratOrientFragment, bundle)
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
