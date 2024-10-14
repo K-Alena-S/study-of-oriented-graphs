@@ -6,7 +6,7 @@ class ClassifCirc(graph: Array<IntArray>, col: Collection) {
 
     init {
         val a = graph.map { it.clone() }.toTypedArray()
-        val cs = ContourString(a)
+        val cs = ContourString(a, graph.size) // graph.size максимальное количество вершин в контуре считает алгоритм
         val resId = cs.getId()
 
         var cherche = true

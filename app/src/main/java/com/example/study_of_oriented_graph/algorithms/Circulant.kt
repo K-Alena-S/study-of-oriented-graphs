@@ -5,6 +5,7 @@ class Circulant(private val N: Int, private val col: Collection) {
     private val n: Int = if (N % 2 == 0) (N - 2) / 2 else (N - 1) / 2
     private var num: Int = 0
     private var cherche: Boolean = true
+    private var str: String = ""
 
     init {
         val tuple = IntArray(n) { -1 }
@@ -33,7 +34,11 @@ class Circulant(private val N: Int, private val col: Collection) {
         }
 
         val coc = ClassifCirc(matrix, col)
-        println("${coc.getClassGraph()} ${col.getList().size}")
+        str += ("${coc.getClassGraph()} ${col.getList().size}")
+    }
+
+    fun getString(): String {
+        return str
     }
 
     private fun func(tuple: IntArray, count: Int) {
