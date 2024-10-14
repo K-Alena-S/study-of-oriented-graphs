@@ -67,7 +67,11 @@
         android:id="@+id/FourthTwoFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.FourthTwoFragment"
         android:label="fragment_fourth_two"
-        tools:layout="@layout/fragment_fourth_two" />
+        tools:layout="@layout/fragment_fourth_two" >
+        <action
+            android:id="@+id/action_FourthTwoFragment_to_GeneratOrientFragment"
+            app:destination="@id/GeneratOrientFragment" />
+    </fragment>
     <fragment
         android:id="@+id/FifthOneFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.FifthOneFragment"
@@ -117,4 +121,9 @@
         android:name="com.example.study_of_oriented_graph.interfaces.AntiContourFragment"
         android:label="fragment_anticontour"
         tools:layout="@layout/fragment_anticontour" />
+    <fragment
+        android:id="@+id/GeneratOrientFragment"
+        android:name="com.example.study_of_oriented_graph.interfaces.GeneratOrientFragment"
+        android:label="fragment_generat_orient"
+        tools:layout="@layout/fragment_generat_orient" />
 </navigation>

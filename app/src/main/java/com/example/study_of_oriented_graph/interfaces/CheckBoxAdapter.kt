@@ -10,9 +10,20 @@ import com.example.study_of_oriented_graph.R
 
 class CheckBoxAdapter(private val buttonData: List<Int>) : RecyclerView.Adapter<CheckBoxAdapter.ViewHolder>() {
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val checkBox: CheckBox = view.findViewById(R.id.button_text)
-        val textView: TextView = view.findViewById(R.id.text_view)
+    private val checkedStates = BooleanArray(buttonData.size)
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val checkBox: CheckBox = itemView.findViewById(R.id.button_text)
+        val textView: TextView = itemView.findViewById(R.id.text_view)
+
+        fun bind(position: Int) {
+            textView.text = buttonData[position].toString()
+            checkBox.isChecked = checkedStates[position]
+
+            checkBox.setOnCheckedChangeListener { _, isChecked ->
+                checkedStates[position] = isChecked
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,11 +33,13 @@ class CheckBoxAdapter(private val buttonData: List<Int>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = buttonData[position].toString()
-        holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
-            // Здесь Вы можете обработать состояние CheckBox, если нужно
-        }
+        holder.bind(position)
     }
 
-    override fun getItemCount() = buttonData.size
+    override fun getItemCount(): Int = buttonData.size
+
+    fun getCheckedItems(): List<Int> {
+        return buttonData.filterIndexed { index, _ -> checkedStates[index] }
+    }
+
 }
