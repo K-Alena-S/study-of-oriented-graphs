@@ -1,13 +1,14 @@
 package com.example.study_of_oriented_graph.algorithms
 
-class ClassifCirc(graph: Array<IntArray>, col: Collection) {
+class ClassifCirc(N: Int, graph: Array<IntArray>, col: Collection) {
 
     private var classgraph: Int = 0
+    private var resId: String = ""
 
     init {
         val a = graph.map { it.clone() }.toTypedArray()
-        val cs = ContourString(a, graph.size) // graph.size максимальное количество вершин в контуре считает алгоритм
-        val resId = cs.getId()
+        val cs = ContourString(a, N)
+        resId = cs.getId()
 
         var cherche = true
 
@@ -30,5 +31,9 @@ class ClassifCirc(graph: Array<IntArray>, col: Collection) {
 
     fun getClassGraph(): Int {
         return classgraph
+    }
+
+    fun getContString(): String {
+        return resId
     }
 }

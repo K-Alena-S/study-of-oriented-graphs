@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.study_of_oriented_graph.R
+import com.example.study_of_oriented_graph.algorithms.Circulant
+import com.example.study_of_oriented_graph.algorithms.Collection
 
 class GeneratOrientFragment : Fragment() {
 
@@ -28,15 +30,16 @@ class GeneratOrientFragment : Fragment() {
 
         val textView: TextView = view.findViewById(R.id.text_view_orient)
 
-        textView.text = selectedItems?.joinToString(", ") ?: "Нет выбранных элементов"
+//        textView.text = selectedItems?.joinToString(", ") ?: "Нет выбранных элементов"
 
         selectedItems = arguments?.getIntegerArrayList("selectedItems")
+        val buttonInt = arguments?.getInt("buttonInt")
 
-        var strText = "Выбранные дистанции: "
+        val collection = Collection()
 
-        for (i in selectedItems!!){
-             strText += "$i "
-        }
+        val circulant = Circulant(buttonInt!!, collection, selectedItems!!)
+
+        var strText = circulant.getString()
 
         textView.text = strText
     }

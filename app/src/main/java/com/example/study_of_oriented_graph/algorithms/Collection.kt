@@ -1,22 +1,29 @@
 package com.example.study_of_oriented_graph.algorithms
 
-class Collection {
+interface CollectionInterface {
+    fun setStrList(str: String)
+    fun getStrList(): List<String>
+    fun setList(graph: Array<IntArray>)
+    fun getList(): List<Array<IntArray>>
+}
+
+class Collection : CollectionInterface {
     private val graphList: MutableList<Array<IntArray>> = mutableListOf()
     private val strList: MutableList<String> = mutableListOf()
 
-    fun setStrList(str: String) {
+    override fun setStrList(str: String) {
         strList.add(str)
     }
 
-    fun getStrList(): List<String> {
+    override fun getStrList(): List<String> {
         return strList
     }
 
-    fun setList(graph: Array<IntArray>) {
+    override fun setList(graph: Array<IntArray>) {
         graphList.add(graph)
     }
 
-    fun getList(): List<Array<IntArray>> {
+    override fun getList(): List<Array<IntArray>> {
         return graphList
     }
 }

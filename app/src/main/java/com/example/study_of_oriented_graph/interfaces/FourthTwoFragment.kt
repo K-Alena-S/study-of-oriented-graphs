@@ -51,6 +51,9 @@ class FourthTwoFragment : Fragment()  {
             val selectedItems = adapter.getCheckedItems()
 
             val bundle = Bundle()
+            if (buttonInt != null) {
+                bundle.putInt("buttonInt", buttonInt.toInt())
+            }
             bundle.putIntegerArrayList("selectedItems", ArrayList(selectedItems))
 
             findNavController().navigate(R.id.action_FourthTwoFragment_to_GeneratOrientFragment, bundle)
