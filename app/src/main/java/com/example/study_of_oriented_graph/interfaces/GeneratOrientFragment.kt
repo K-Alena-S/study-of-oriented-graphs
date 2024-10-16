@@ -9,19 +9,22 @@ import androidx.fragment.app.Fragment
 import com.example.study_of_oriented_graph.R
 import com.example.study_of_oriented_graph.algorithms.Circulant
 import com.example.study_of_oriented_graph.algorithms.Collection
+import com.example.study_of_oriented_graph.databinding.FragmentGeneratOrientBinding
 
 class GeneratOrientFragment : Fragment() {
 
     var selectedItems: ArrayList<Int>? = null
+    private var _binding: FragmentGeneratOrientBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_generat_orient, container, false)
+        _binding = FragmentGeneratOrientBinding.inflate(inflater, container, false)
         selectedItems = arguments?.getIntegerArrayList("selectedItems")
 
-        return view
+        return binding.root
     }
 
 
@@ -30,8 +33,6 @@ class GeneratOrientFragment : Fragment() {
 
         val textView: TextView = view.findViewById(R.id.text_view_orient)
 
-//        textView.text = selectedItems?.joinToString(", ") ?: "Нет выбранных элементов"
-
         selectedItems = arguments?.getIntegerArrayList("selectedItems")
         val buttonInt = arguments?.getInt("buttonInt")
 
@@ -39,9 +40,23 @@ class GeneratOrientFragment : Fragment() {
 
         val circulant = Circulant(buttonInt!!, collection, selectedItems!!)
 
-        var strText = circulant.getString()
+        val strText = circulant.getString()
 
         textView.text = strText
+
+        binding.contourClass.setOnClickListener{
+            var text_cont = ""
+            var k = 1
+            for (i in collection.getStrList()) {
+                text_cont += "$k: $i\n"
+                k++
+            }
+            textView.text = text_cont
+        }
+
+        binding.copi.setOnClickListener {
+
+        }
     }
 
 }

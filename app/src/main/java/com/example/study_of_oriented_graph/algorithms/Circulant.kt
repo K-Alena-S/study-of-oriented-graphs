@@ -40,14 +40,14 @@ class Circulant(private val N: Int, private val col: Collection, private val dis
         }
         val coc = ClassifCirc(N, matrix, col)
 
-        for (i in matrix[0])
-            str += "$i "
-        str += " ^ $count"
-        str += " ^ "
-        str += ("${coc.getClassGraph()} ${col.getList().size} :  ${coc.getContString()} \n")
+        for (i in 1 until (N/2+1))
+            str += "${matrix[0][i]} "
+
+        str += (": ${coc.getClassGraph() + 1} ${col.getList().size} :  ${coc.getContString()} \n")
     }
 
     fun getString(): String {
+        str += "\n Классов: ${col.getList().size}"
         return str
     }
 
