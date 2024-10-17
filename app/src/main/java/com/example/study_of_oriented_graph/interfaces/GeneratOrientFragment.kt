@@ -32,9 +32,13 @@ class GeneratOrientFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val textView: TextView = view.findViewById(R.id.text_view_orient)
+        val textName: TextView = view.findViewById(R.id.text_name)
+
 
         selectedItems = arguments?.getIntegerArrayList("selectedItems")
         val buttonInt = arguments?.getInt("buttonInt")
+
+        textName.text = "Вершин $buttonInt, дистанции $selectedItems"
 
         val collection = Collection()
 

@@ -11,7 +11,11 @@ class ContourString(private val graphArray: Array<IntArray>, private val contour
             varRecursive(graphArray, contour, vertex, i, 0, -1)
         }
 
-        id = contour.joinToString(" ") { if (it != 0) it.toString() else "" }.trim()
+        id = contour.joinToString(" ") {
+//            if (it != 0)
+                it.toString()
+//            else ""
+        }.trim()
     }
 
     fun getId(): String {
