@@ -32,7 +32,8 @@ class FourthTwoFragment : Fragment()  {
         // Создаем список данных для кнопок
         val buttonData = mutableListOf<Int>()
         if (buttonInt != null) {
-            for (i in 1..(buttonInt.toInt()) / 2) {
+            var count = (buttonInt.toInt()) / 2 + (buttonInt.toInt() % 2) - 1
+            for (i in 1 .. count ) {
                 buttonData.add(i)
             }
         } else {

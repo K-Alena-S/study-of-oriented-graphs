@@ -30,7 +30,7 @@ class SecondFragment : Fragment() {
 
         // Создаем список данных для кнопок
         val buttonData = mutableListOf<Int>()
-        for (i in 5..28) {
+        for (i in 5..40) {
             buttonData.add(i)
         }
 

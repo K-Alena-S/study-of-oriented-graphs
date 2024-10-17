@@ -10,7 +10,9 @@ class Circulant(private val N: Int, private val col: Collection, private val dis
     init {
         val tuple = IntArray(n) { -1 }
 
-        for (k in 0 until (1 shl (n - 1)) + 1) {
+        var str = (1 shl (n - 1))
+
+        for (k in 0 until str) {
             if (cherche) {
                 matr(tuple)
                 num++
