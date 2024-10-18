@@ -19,33 +19,42 @@
             android:textSize="16sp"
             android:text=""/>
 
-
         <Button
             android:id="@+id/contour_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textSize="16sp"
-            android:text="Вывести только контуры классов" />
+            android:text="Вывести таблицу частично" />
 
         <Button
-            android:id="@+id/copi"
+            android:id="@+id/save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textSize="16sp"
-            android:text="Скопировать" />
+            android:text="Сохранить таблицу" />
 
-        <TextView
-            android:id="@+id/text_view_orient"
-            android:layout_width="wrap_content"
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="16sp"
-            android:text="Классы"
-            android:clickable="true"
-            android:focusable="true"
-            android:longClickable="true" />
+            android:stretchColumns="3"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="5dp"
+            android:showDividers="middle">
+        </TableLayout>
+
+<!--        <TextView-->
+<!--            android:id="@+id/text_view_orient"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:textSize="16sp"-->
+<!--            android:text="Классы"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:longClickable="true" />-->
 
     </LinearLayout>
 </ScrollView>

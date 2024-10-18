@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TableLayout
+import android.widget.TableRow
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.study_of_oriented_graph.R
@@ -31,9 +33,8 @@ class GeneratOrientFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val textView: TextView = view.findViewById(R.id.text_view_orient)
+        val tableLayout: TableLayout = view.findViewById(R.id.tableLayout)
         val textName: TextView = view.findViewById(R.id.text_name)
-
 
         selectedItems = arguments?.getIntegerArrayList("selectedItems")
         val buttonInt = arguments?.getInt("buttonInt")
@@ -42,25 +43,45 @@ class GeneratOrientFragment : Fragment() {
 
         val collection = Collection()
 
-        val circulant = Circulant(buttonInt!!, collection, selectedItems!!)
+        Circulant(buttonInt!!, collection, selectedItems!!)
 
-        val strText = circulant.getString()
+        tableLayout.removeAllViews()
 
-        textView.text = strText
+        // Добавить заголовки таблицы (при необходимости)
+        val headerRow = TableRow(context)
+        headerRow.addView(createTextView("Кл"))
+        for (i in 3..buttonInt)
+        headerRow.addView(createTextView("$i"))
+        tableLayout.addView(headerRow)
 
-        binding.contourClass.setOnClickListener{
-            var text_cont = ""
-            var k = 1
-            for (i in collection.getStrList()) {
-                text_cont += "$k: $i\n"
-                k++
-            }
-            textView.text = text_cont
+        // Пример добавления данных в таблицу
+        for (i in collection.getStrList().withIndex()) {
+            val dataRow = TableRow(context)
+            dataRow.addView(createTextView((i.index + 1).toString()))
+
+            val inputString = i.value
+            val intArray: IntArray = inputString.split(" ") // Разделяем строку по пробелам
+                .map { it.toInt() } // Преобразуем каждую строку в Int
+                .toIntArray() // Преобразуем в IntArray
+
+            for (k in intArray)
+            dataRow.addView(createTextView(k.toString()))
+
+            tableLayout.addView(dataRow)
         }
 
-        binding.copi.setOnClickListener {
 
+        binding.save.setOnClickListener {
+//            exportToXml(collection)
         }
+    }
+
+    // Функция для создания TextView
+    private fun createTextView(text: String): TextView {
+        val textView = TextView(context)
+        textView.text = text
+        textView.setPadding(16, 16, 16, 16) // Установка отступов
+        return textView
     }
 
 }
