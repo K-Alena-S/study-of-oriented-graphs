@@ -1,5 +1,7 @@
 package com.example.study_of_oriented_graph.interfaces
 
+import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -47,14 +49,14 @@ class GeneratOrientFragment : Fragment() {
 
         tableLayout.removeAllViews()
 
-        // Добавить заголовки таблицы (при необходимости)
+        // Добавить заголовки таблицы
         val headerRow = TableRow(context)
         headerRow.addView(createTextView("Кл"))
         for (i in 3..buttonInt)
         headerRow.addView(createTextView("$i"))
         tableLayout.addView(headerRow)
 
-        // Пример добавления данных в таблицу
+        // Добавление данных в таблицу
         for (i in collection.getStrList().withIndex()) {
             val dataRow = TableRow(context)
             dataRow.addView(createTextView((i.index + 1).toString()))
@@ -70,6 +72,74 @@ class GeneratOrientFragment : Fragment() {
             tableLayout.addView(dataRow)
         }
 
+        val columnCount = buttonInt - 2
+        val rowCount = tableLayout.childCount // Получаем количество строк
+
+        // Проходим по каждому столбцу
+        for (col in 1 .. columnCount) {
+            var maxValue: Int = Int.MIN_VALUE
+            var maxRowIndex: Int = -1
+
+            var minValue: Int = Int.MAX_VALUE
+            var minRowIndex: Int = -1
+
+            // Проходим по строкам и находим максимальное значение в текущем столбце
+            for (row in 1 until rowCount) {  // Пропускаем заголовок
+                val tableRow = tableLayout.getChildAt(row) as TableRow
+                val cellValue = (tableRow.getChildAt(col) as TextView).text.toString()
+                    .toIntOrNull() ?: continue
+
+                if (cellValue > maxValue) {
+                    maxValue = cellValue
+                    maxRowIndex = row
+                }
+                if (cellValue < minValue) {
+                    minValue = cellValue
+                    minRowIndex = row
+                }
+            }
+
+            val isDarkTheme = (context!!.resources.configuration.uiMode and
+                    Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+
+            // Выделение ячейки с максимальным значением
+            if (maxRowIndex != -1 && maxValue != minValue) {
+                for (row in 1 until rowCount) {
+                    val tableRow = tableLayout.getChildAt(row) as TableRow
+                    val cellValue = (tableRow.getChildAt(col) as TextView).text.toString()
+                        .toIntOrNull() ?: continue
+                    if (cellValue == maxValue) {
+                        val maxRow = tableLayout.getChildAt(row) as TableRow
+                        val maxCell = maxRow.getChildAt(col) as TextView
+
+                        val lightRed = if (isDarkTheme) {
+                            Color.parseColor("#d8504d") // Темнее светло-красного
+                        } else {
+                            Color.parseColor("#FFCCCB") // Светло-красный
+                        }
+                        maxCell.setBackgroundColor(lightRed)
+                    }
+                }
+            }
+
+            if (minRowIndex != -1 && maxValue != minValue) {
+                for (row in 1 until rowCount) {
+                    val tableRow = tableLayout.getChildAt(row) as TableRow
+                    val cellValue = (tableRow.getChildAt(col) as TextView).text.toString()
+                        .toIntOrNull() ?: continue
+                    if (cellValue == minValue) {
+                        val minRow = tableLayout.getChildAt(row) as TableRow
+                        val minCell = minRow.getChildAt(col) as TextView
+                        val lightBlue = if (isDarkTheme) {
+                            Color.parseColor("#5280a4") // Темнее светло-синего
+                        } else {
+                            Color.parseColor("#ADD8E6") // Светло-синий
+                        }
+                        minCell.setBackgroundColor(lightBlue)
+                    }
+                }
+            }
+        }
 
         binding.save.setOnClickListener {
 //            exportToXml(collection)
