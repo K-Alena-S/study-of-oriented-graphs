@@ -114,9 +114,9 @@ class GeneratOrientFragment : Fragment() {
                         val maxCell = maxRow.getChildAt(col) as TextView
 
                         val lightRed = if (isDarkTheme) {
-                            Color.parseColor("#d8504d") // Темнее светло-красного
+                            0xd8504d // Темнее светло-красного
                         } else {
-                            Color.parseColor("#FFCCCB") // Светло-красный
+                            0xFFCCCB // Светло-красный
                         }
                         maxCell.setBackgroundColor(lightRed)
                     }
@@ -132,9 +132,9 @@ class GeneratOrientFragment : Fragment() {
                         val minRow = tableLayout.getChildAt(row) as TableRow
                         val minCell = minRow.getChildAt(col) as TextView
                         val lightBlue = if (isDarkTheme) {
-                            Color.parseColor("#5280a4") // Темнее светло-синего
+                            0x5280a4 // Темнее светло-синего
                         } else {
-                            Color.parseColor("#ADD8E6") // Светло-синий
+                            0xADD8E6 // Светло-синий
                         }
                         minCell.setBackgroundColor(lightBlue)
                     }
