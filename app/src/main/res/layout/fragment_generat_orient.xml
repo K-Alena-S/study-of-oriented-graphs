@@ -33,7 +33,6 @@
                 android:id="@+id/tableLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:stretchColumns="0"
                 android:divider="@android:color/darker_gray"
                 android:dividerHeight="5dp"
                 android:showDividers="middle">

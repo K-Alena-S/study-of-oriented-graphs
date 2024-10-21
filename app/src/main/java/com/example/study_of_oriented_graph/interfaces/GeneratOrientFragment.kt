@@ -66,9 +66,8 @@ class GeneratOrientFragment : Fragment() {
                 .map { it.toInt() } // Преобразуем каждую строку в Int
                 .toIntArray() // Преобразуем в IntArray
 
-            for (k in intArray) {
-                dataRow.addView(createTextView(k.toString()))
-            }
+            for (k in intArray)
+            dataRow.addView(createTextView(k.toString()))
 
             tableLayout.addView(dataRow)
         }
@@ -114,9 +113,9 @@ class GeneratOrientFragment : Fragment() {
                         val maxCell = maxRow.getChildAt(col) as TextView
 
                         val lightRed = if (isDarkTheme) {
-                            0xd8504d // Темнее светло-красного
+                            0xd8504d - Int.MAX_VALUE // Темнее светло-красного
                         } else {
-                            0xFFCCCB // Светло-красный
+                            0xFFCCCB - Int.MAX_VALUE // Светло-красный
                         }
                         maxCell.setBackgroundColor(lightRed)
                     }
@@ -132,9 +131,9 @@ class GeneratOrientFragment : Fragment() {
                         val minRow = tableLayout.getChildAt(row) as TableRow
                         val minCell = minRow.getChildAt(col) as TextView
                         val lightBlue = if (isDarkTheme) {
-                            0x5280a4 // Темнее светло-синего
+                            0x5280a4 - Int.MAX_VALUE// Темнее светло-синего
                         } else {
-                            0xADD8E6 // Светло-синий
+                            0xADD8E6 - Int.MAX_VALUE// Светло-синий
                         }
                         minCell.setBackgroundColor(lightBlue)
                     }
