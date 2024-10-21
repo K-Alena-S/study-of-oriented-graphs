@@ -66,8 +66,9 @@ class GeneratOrientFragment : Fragment() {
                 .map { it.toInt() } // Преобразуем каждую строку в Int
                 .toIntArray() // Преобразуем в IntArray
 
-            for (k in intArray)
-            dataRow.addView(createTextView(k.toString()))
+            for (k in intArray) {
+                dataRow.addView(createTextView(k.toString()))
+            }
 
             tableLayout.addView(dataRow)
         }
@@ -99,7 +100,7 @@ class GeneratOrientFragment : Fragment() {
                 }
             }
 
-            val isDarkTheme = (context!!.resources.configuration.uiMode and
+            val isDarkTheme = (requireContext().resources.configuration.uiMode and
                     Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 
             // Выделение ячейки с максимальным значением
