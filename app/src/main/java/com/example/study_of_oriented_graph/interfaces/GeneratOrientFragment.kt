@@ -1,8 +1,8 @@
 package com.example.study_of_oriented_graph.interfaces
 
 import android.content.res.Configuration
-import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,7 +67,7 @@ class GeneratOrientFragment : Fragment() {
                 .toIntArray() // Преобразуем в IntArray
 
             for (k in intArray)
-            dataRow.addView(createTextView(k.toString()))
+                dataRow.addView(createTextView(k.toString()))
 
             tableLayout.addView(dataRow)
         }
@@ -104,40 +104,13 @@ class GeneratOrientFragment : Fragment() {
 
             // Выделение ячейки с максимальным значением
             if (maxRowIndex != -1 && maxValue != minValue) {
-                for (row in 1 until rowCount) {
-                    val tableRow = tableLayout.getChildAt(row) as TableRow
-                    val cellValue = (tableRow.getChildAt(col) as TextView).text.toString()
-                        .toIntOrNull() ?: continue
-                    if (cellValue == maxValue) {
-                        val maxRow = tableLayout.getChildAt(row) as TableRow
-                        val maxCell = maxRow.getChildAt(col) as TextView
-
-                        val lightRed = if (isDarkTheme) {
-                            0xd8504d - Int.MAX_VALUE // Темнее светло-красного
-                        } else {
-                            0xFFCCCB - Int.MAX_VALUE // Светло-красный
-                        }
-                        maxCell.setBackgroundColor(lightRed)
-                    }
-                }
+                fillingColor(rowCount, maxValue, tableLayout, col, 0xFFCCCB - Int.MAX_VALUE,
+                    0xd8504d - Int.MAX_VALUE, isDarkTheme)
             }
 
             if (minRowIndex != -1 && maxValue != minValue) {
-                for (row in 1 until rowCount) {
-                    val tableRow = tableLayout.getChildAt(row) as TableRow
-                    val cellValue = (tableRow.getChildAt(col) as TextView).text.toString()
-                        .toIntOrNull() ?: continue
-                    if (cellValue == minValue) {
-                        val minRow = tableLayout.getChildAt(row) as TableRow
-                        val minCell = minRow.getChildAt(col) as TextView
-                        val lightBlue = if (isDarkTheme) {
-                            0x5280a4 - Int.MAX_VALUE// Темнее светло-синего
-                        } else {
-                            0xADD8E6 - Int.MAX_VALUE// Светло-синий
-                        }
-                        minCell.setBackgroundColor(lightBlue)
-                    }
-                }
+                fillingColor(rowCount, minValue, tableLayout, col, 0xADD8E6 - Int.MAX_VALUE,
+                    0x5280a4 - Int.MAX_VALUE, isDarkTheme)
             }
         }
 
@@ -146,11 +119,32 @@ class GeneratOrientFragment : Fragment() {
         }
     }
 
+    private fun fillingColor(rowCount: Int, Value: Int, tableLayout: TableLayout, col: Int,
+                             color: Int, colorDark: Int, isDarkTheme: Boolean) {
+        for (row in 1 until rowCount) {
+            val tableRow = tableLayout.getChildAt(row) as TableRow
+            val cellValue = (tableRow.getChildAt(col) as TextView).text.toString()
+                .toIntOrNull() ?: continue
+            if (cellValue == Value) {
+                val maxRow = tableLayout.getChildAt(row) as TableRow
+                val maxCell = maxRow.getChildAt(col) as TextView
+
+                val lightColor = if (isDarkTheme) {
+                    colorDark
+                } else {
+                    color
+                }
+                maxCell.setBackgroundColor(lightColor)
+            }
+        }
+    }
+
     // Функция для создания TextView
     private fun createTextView(text: String): TextView {
         val textView = TextView(context)
         textView.text = text
         textView.setPadding(16, 16, 16, 16) // Установка отступов
+        textView.setGravity(Gravity.CENTER)
         return textView
     }
 
