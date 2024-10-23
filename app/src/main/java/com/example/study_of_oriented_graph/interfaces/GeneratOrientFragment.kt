@@ -1,5 +1,8 @@
 package com.example.study_of_oriented_graph.interfaces
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Gravity
@@ -9,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.study_of_oriented_graph.R
 import com.example.study_of_oriented_graph.algorithms.Circulant
@@ -114,9 +118,33 @@ class GeneratOrientFragment : Fragment() {
             }
         }
 
-        binding.save.setOnClickListener {
-//            exportToXml(collection)
+        binding.copy.setOnClickListener {
+            copyTableDataToClipboard(tableLayout, requireContext())
         }
+    }
+
+    private fun copyTableDataToClipboard(tableLayout: TableLayout, context: Context) {
+        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val stringBuilder = StringBuilder()
+
+        for (i in 0 until tableLayout.childCount) {
+            val tableRow = tableLayout.getChildAt(i) as TableRow
+            for (j in 0 until tableRow.childCount) {
+                val textView = tableRow.getChildAt(j) as TextView
+                stringBuilder.append(textView.text)
+                if (j < tableRow.childCount - 1) {
+                    stringBuilder.append("\t") // Используем табуляцию для разделения ячеек
+                }
+            }
+            stringBuilder.append("\n") // Переход на новую строку после каждой строки таблицы
+        }
+
+        // Копируем данные в буфер обмена
+        val clipData = ClipData.newPlainText("Table Data", stringBuilder.toString())
+        clipboard.setPrimaryClip(clipData)
+
+        // Уведомление о том, что данные скопированы
+        Toast.makeText(context, "Данные таблицы скопированы в буфер обмена", Toast.LENGTH_SHORT).show()
     }
 
     private fun fillingColor(rowCount: Int, Value: Int, tableLayout: TableLayout, col: Int,
