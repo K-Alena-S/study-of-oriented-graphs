@@ -1,6 +1,5 @@
 package com.example.study_of_oriented_graph.interfaces
 
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,8 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.study_of_oriented_graph.R
 import com.example.study_of_oriented_graph.databinding.FragmentSecondBinding
 
-
 class SecondFragment : Fragment() {
+
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
 

@@ -13,8 +13,6 @@ import com.example.study_of_oriented_graph.algorithms.AntiContours
 
 class AntiContourFragment: Fragment() {
 
-    private lateinit var anricontourTextView: TextView
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -74,5 +72,4 @@ class AntiContourFragment: Fragment() {
         textView.setPadding(16, 16, 16, 16) // Установка отступов
         return textView
     }
-
 }

@@ -37,5 +37,4 @@ class FifthOneFragment : Fragment() {
             findNavController().navigate(R.id.action_FifthOneFragment_to_SixthFragment, bundle)
         }
     }
-
 }

@@ -61,5 +61,4 @@ class FifthTwoFragment : Fragment() {
             row.joinToString(", ") { it.toString() }
         }
     }
-
 }

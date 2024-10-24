@@ -10,6 +10,7 @@ import com.example.study_of_oriented_graph.R
 import com.example.study_of_oriented_graph.databinding.FragmentSixthBinding
 
 class SixthFragment : Fragment() {
+
     private var _binding: FragmentSixthBinding? = null
     private val binding get() = _binding!!
 
@@ -43,15 +44,5 @@ class SixthFragment : Fragment() {
             bundle.putString("vertices", vertices)
             findNavController().navigate(R.id.action_SixthFragment_to_SeventhFragment, bundle)
         }
-
-        binding.buttonDinsyst.setOnClickListener {
-
-        }
-
-        binding.buttonFragment.setOnClickListener {
-
-        }
-
     }
-
 }

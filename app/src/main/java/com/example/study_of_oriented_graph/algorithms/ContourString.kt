@@ -1,6 +1,7 @@
 package com.example.study_of_oriented_graph.algorithms
 
 class ContourString(private val graphArray: Array<IntArray>, private val contourEnd: Int) {
+
     private var id: String = ""
     private val m: Int = 3
     private val contour: IntArray = IntArray(graphArray.size - m + 1)
@@ -12,9 +13,7 @@ class ContourString(private val graphArray: Array<IntArray>, private val contour
         }
 
         id = contour.joinToString(" ") {
-//            if (it != 0)
                 it.toString()
-//            else ""
         }.trim()
     }
 

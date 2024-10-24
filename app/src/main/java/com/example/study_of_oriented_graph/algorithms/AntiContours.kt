@@ -1,6 +1,7 @@
 package com.example.study_of_oriented_graph.algorithms
 
 class AntiContours(private val graphArray: Array<IntArray>, private val contourEnd: Int) {
+
     private val m = 3 // сдвиг в массиве
     var num = 0
     var conto = 1

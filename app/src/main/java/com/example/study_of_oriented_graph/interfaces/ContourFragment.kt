@@ -13,9 +13,6 @@ import com.example.study_of_oriented_graph.algorithms.ContourString
 
 class ContourFragment : Fragment() {
 
-    private lateinit var contourTextView: TextView
-    private lateinit var matrix: Array<IntArray>
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,5 +67,4 @@ class ContourFragment : Fragment() {
         textView.setPadding(16, 16, 16, 16) // Установка отступов
         return textView
     }
-
 }

@@ -37,7 +37,6 @@ class GeneratOrientFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -241,5 +240,4 @@ class GeneratOrientFragment : Fragment() {
         textView.setGravity(Gravity.CENTER)
         return textView
     }
-
 }

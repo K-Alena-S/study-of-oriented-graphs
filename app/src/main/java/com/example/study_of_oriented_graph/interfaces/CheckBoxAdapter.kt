@@ -41,5 +41,4 @@ class CheckBoxAdapter(private val buttonData: List<Int>) : RecyclerView.Adapter<
     fun getCheckedItems(): List<Int> {
         return buttonData.filterIndexed { index, _ -> checkedStates[index] }
     }
-
 }
