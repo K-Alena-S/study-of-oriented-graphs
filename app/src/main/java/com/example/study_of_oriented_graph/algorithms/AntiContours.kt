@@ -28,6 +28,10 @@ class AntiContours(private val graphArray: Array<IntArray>, private val contourE
         return anticont
     }
 
+    fun getAntiContAll(): IntArray {
+        return contour
+    }
+
     private fun cont(graphArray: Array<IntArray>, contour: IntArray, vertex: IntArray, a: Int, n: Int, k: Int, or: Int) {
         if (a == k) {
             if (n > 3 && or == conto) {
