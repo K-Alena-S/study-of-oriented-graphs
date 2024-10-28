@@ -8,6 +8,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import com.example.study_of_oriented_graph.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.info -> {
+                showInfoDialog()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -45,5 +50,14 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    private fun showInfoDialog() {
+        val message = R.string.info
+        AlertDialog.Builder(this)
+            .setTitle("Информация")
+            .setMessage(message)
+            .setPositiveButton("ОК") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 }

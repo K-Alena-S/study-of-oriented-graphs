@@ -1,12 +1,23 @@
 <resources>
     <string name="app_name">АфинаГраф</string>
     <string name="action_settings">Настройки</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Главная страница</string>
     <string name="second_fragment_label">Выбор вершин</string>
-    <string name="third_fragment_label"></string>
+    <string name="third_fragment_label">Варианты ввода графа</string>
+    <string name="fourth_one_fragment_label">Варианты ввода графа</string>
+    <string name="fifth_one_fragment_label">Ввод матрицы Зейделя</string>
+    <string name="fifth_two_fragment_label">Ввод циркулянта</string>
+    <string name="fourth_two_fragment_label">Выбор дистанций</string>
+    <string name="generat_orient_fragment_label">Таблица контуров</string>
+    <string name="cont_fragment_label">Контуры</string>
+    <string name="anticont_fragment_label">Антиконтуры</string>
+    <string name="sixth_fragment_label">Выбор характеристики</string>
+    <string name="seventh_fragment_label">Границы</string>
+
     <string name="next">Далее</string>
     <string name="previous">Previous</string>
-
+    <string name="info"> Версия: v1.0.0 \nРазработчик: K-Alena-S \nПочта для найденных ошибок в приложении: k-alena-s@mail.ru</string>
 
 </resources>

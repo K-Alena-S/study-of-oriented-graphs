@@ -12,13 +12,15 @@ import android.view.ViewGroup
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.study_of_oriented_graph.MainActivity
 import com.example.study_of_oriented_graph.R
 import com.example.study_of_oriented_graph.algorithms.AntiContours
 import com.example.study_of_oriented_graph.algorithms.Circulant
 import com.example.study_of_oriented_graph.algorithms.Collection
 import com.example.study_of_oriented_graph.databinding.FragmentGeneratOrientBinding
+import com.google.android.material.snackbar.Snackbar
 
 class GeneratOrientFragment : Fragment() {
 
@@ -159,27 +161,27 @@ class GeneratOrientFragment : Fragment() {
 
             // Выделение ячейки с максимальным значением
             if (maxRowIndex != -1 && maxValue != minValue) {
-                fillingColor(rowCount, maxValue, tableLayout, col, 0xFFCCCB - Int.MAX_VALUE,
-                    0xd8504d - Int.MAX_VALUE, isDarkTheme, true)
+                fillingColor(rowCount, maxValue, tableLayout, col, R.color.light_red,
+                    R.color.red, isDarkTheme, true)
             }
 
             if (minRowIndex != -1 && maxValue != minValue) {
-                fillingColor(rowCount, minValue, tableLayout, col, 0xADD8E6 - Int.MAX_VALUE,
-                    0x5280a4 - Int.MAX_VALUE, isDarkTheme, true)
+                fillingColor(rowCount, minValue, tableLayout, col, R.color.light_blue,
+                    R.color.blue, isDarkTheme, true)
             }
 
             if (isAddAnticont) {
                 if (maxValueAnti != minValueAnti) {
                     fillingColor(
-                        rowCount, maxValueAnti, tableLayout, col, 0xa9e66b - Int.MAX_VALUE,
-                        0x95e049 - Int.MAX_VALUE, isDarkTheme, false
+                        rowCount, maxValueAnti, tableLayout, col, R.color.light_green,
+                        R.color.green, isDarkTheme, false
                     )
                 }
 
                 if (maxValueAnti != minValueAnti) {
                     fillingColor(
-                        rowCount, minValueAnti, tableLayout, col, 0xffc585 - Int.MAX_VALUE,
-                        0xff9a2a - Int.MAX_VALUE, isDarkTheme, false
+                        rowCount, minValueAnti, tableLayout, col, R.color.light_orange,
+                        R.color.orange, isDarkTheme, false
                     )
                 }
             }
@@ -207,7 +209,10 @@ class GeneratOrientFragment : Fragment() {
         clipboard.setPrimaryClip(clipData)
 
         // Уведомление о том, что данные скопированы
-        Toast.makeText(context, "Данные таблицы скопированы в буфер обмена", Toast.LENGTH_SHORT).show()
+        val rootView = (context as MainActivity).findViewById<View>(android.R.id.content)
+        val snackbar = Snackbar.make(rootView, "Данные таблицы скопированы в буфер обмена", Snackbar.LENGTH_INDEFINITE)
+        snackbar.setAction("ОК") { snackbar.dismiss() }
+        snackbar.show()
     }
 
     private fun fillingColor(rowCount: Int, Value: Int, tableLayout: TableLayout, col: Int,
@@ -223,9 +228,9 @@ class GeneratOrientFragment : Fragment() {
                 val maxCell = maxRow.getChildAt(col) as TextView
 
                 val lightColor = if (isDarkTheme) {
-                    colorDark
+                    ContextCompat.getColor(maxCell.context, colorDark)
                 } else {
-                    color
+                    ContextCompat.getColor(maxCell.context, color)
                 }
                 maxCell.setBackgroundColor(lightColor)
             }

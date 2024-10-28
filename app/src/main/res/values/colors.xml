@@ -3,5 +3,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="button_default_color">#FF6200EE</color>
-    <color name="button_pressed_color">#8640ea</color>
+    <color name="button_pressed_color">#FF8640EA</color>
+    <color name="light_red">#FFFFCCCB</color>
+    <color name="red">#FFD8504D</color>
+    <color name="light_blue">#FFADD8E6</color>
+    <color name="blue">#FF5280A4</color>
+    <color name="light_green">#FFA9E66B</color>
+    <color name="green">#FF477E0F</color>
+    <color name="light_orange">#FFFFC585</color>
+    <color name="orange">#FFFF9A2A</color>
 </resources>

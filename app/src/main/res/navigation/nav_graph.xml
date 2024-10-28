@@ -31,7 +31,7 @@
     <fragment
         android:id="@+id/ThirdFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.ThirdFragment"
-        android:label="fragment_third"
+        android:label="@string/third_fragment_label"
         tools:layout="@layout/fragment_third" >
         <action
             android:id="@+id/action_ThirdFragment_to_FourthOneFragment"
@@ -54,7 +54,7 @@
     <fragment
         android:id="@+id/FourthOneFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.FourthOneFragment"
-        android:label="fragment_fourth_one"
+        android:label="@string/fourth_one_fragment_label"
         tools:layout="@layout/fragment_fourth_one" >
         <action
             android:id="@+id/action_FourthOneFragment_to_FifthOneFragment"
@@ -66,7 +66,7 @@
     <fragment
         android:id="@+id/FourthTwoFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.FourthTwoFragment"
-        android:label="fragment_fourth_two"
+        android:label="@string/fourth_two_fragment_label"
         tools:layout="@layout/fragment_fourth_two" >
         <action
             android:id="@+id/action_FourthTwoFragment_to_GeneratOrientFragment"
@@ -75,7 +75,7 @@
     <fragment
         android:id="@+id/FifthOneFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.FifthOneFragment"
-        android:label="fragment_fifth_one"
+        android:label="@string/fifth_one_fragment_label"
         tools:layout="@layout/fragment_fifth_one" >
         <action
             android:id="@+id/action_FifthOneFragment_to_SixthFragment"
@@ -84,7 +84,7 @@
     <fragment
         android:id="@+id/SixthFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.SixthFragment"
-        android:label="fragment_sixth"
+        android:label="@string/sixth_fragment_label"
         tools:layout="@layout/fragment_sixth" >
         <action
             android:id="@+id/action_SixthFragment_to_SeventhFragment"
@@ -93,7 +93,7 @@
     <fragment
         android:id="@+id/FifthTwoFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.FifthTwoFragment"
-        android:label="fragment_fifth_two"
+        android:label="@string/fifth_two_fragment_label"
         tools:layout="@layout/fragment_fifth_two" >
         <action
             android:id="@+id/action_FifthTwoFragment_to_SixthFragment"
@@ -102,7 +102,7 @@
     <fragment
         android:id="@+id/SeventhFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.SeventhFragment"
-        android:label="fragment_seventh"
+        android:label="@string/seventh_fragment_label"
         tools:layout="@layout/fragment_seventh" >
         <action
             android:id="@+id/action_SeventhFragment_to_AntiContourFragment"
@@ -114,16 +114,16 @@
     <fragment
         android:id="@+id/СontourFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.ContourFragment"
-        android:label="fragment_contour"
+        android:label="@string/cont_fragment_label"
         tools:layout="@layout/fragment_contour" />
     <fragment
         android:id="@+id/AntiContourFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.AntiContourFragment"
-        android:label="fragment_anticontour"
+        android:label="@string/anticont_fragment_label"
         tools:layout="@layout/fragment_anticontour" />
     <fragment
         android:id="@+id/GeneratOrientFragment"
         android:name="com.example.study_of_oriented_graph.interfaces.GeneratOrientFragment"
-        android:label="fragment_generat_orient"
+        android:label="@string/generat_orient_fragment_label"
         tools:layout="@layout/fragment_generat_orient" />
 </navigation>
