@@ -9,6 +9,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.study_of_oriented_graph.R
+import com.google.android.material.snackbar.Snackbar
 
 class FifthTwoFragment : Fragment() {
     private lateinit var matrixInput: EditText
@@ -30,12 +31,24 @@ class FifthTwoFragment : Fragment() {
 
         nextButton.setOnClickListener {
             val bundle = Bundle()
-            val matrix = generateMatrix(matrixInput.text.toString())
-            val matrixStr = matrixToString(matrix)
-            bundle.putString("matrixString", matrixStr)
-            val buttonText = arguments?.getString("buttonText")
-            bundle.putString("buttonText", buttonText)
-            findNavController().navigate(R.id.action_FifthTwoFragment_to_SixthFragment, bundle)
+
+            val onestr = matrixInput.text.toString()
+            val elements = onestr.split(", ").map { it.trim() }
+
+            val buttonText = arguments?.getString("buttonText")?.toIntOrNull()
+
+            if (elements.size == buttonText) {
+                val matrix = generateMatrix(onestr)
+                val matrixStr = matrixToString(matrix)
+
+                bundle.putString("matrixString", matrixStr)
+
+                bundle.putString("buttonText", buttonText.toString())
+                findNavController().navigate(R.id.action_FifthTwoFragment_to_SixthFragment, bundle)
+            }
+            else {
+                Snackbar.make(view, "Ошибка: строка матрицы должна быть размером $buttonText", Snackbar.LENGTH_SHORT).show()
+            }
         }
     }
 

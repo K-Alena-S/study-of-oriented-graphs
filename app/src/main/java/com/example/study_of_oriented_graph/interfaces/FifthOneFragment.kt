@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.navigation.fragment.findNavController
 import com.example.study_of_oriented_graph.R
+import com.google.android.material.snackbar.Snackbar
 
 class FifthOneFragment : Fragment() {
 
@@ -30,11 +31,33 @@ class FifthOneFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         nextButton.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("matrixString", matrixInput.text.toString())
-            val buttonText = arguments?.getString("buttonText")
-            bundle.putString("buttonText", buttonText)
-            findNavController().navigate(R.id.action_FifthOneFragment_to_SixthFragment, bundle)
+            val inputText = matrixInput.text.toString()
+            val buttonText = arguments?.getString("buttonText")?.toIntOrNull()
+
+            if (buttonText != null) {
+                val rows = inputText.split("\n")
+                var isValid = true
+
+                // Проверка каждой строки на корректность
+                for (row in rows) {
+                    val elements = row.split(", ").map { it.trim() }
+                    if (elements.size != buttonText) {
+                        isValid = false
+                        break
+                    }
+                }
+
+                if (isValid && rows.size == buttonText) {
+                    val bundle = Bundle()
+                    bundle.putString("matrixString", inputText)
+                    bundle.putString("buttonText", buttonText.toString())
+                    findNavController().navigate(R.id.action_FifthOneFragment_to_SixthFragment, bundle)
+                } else {
+                    Snackbar.make(view, "Ошибка: матрица должна быть размером $buttonText x $buttonText", Snackbar.LENGTH_SHORT).show()
+                }
+            } else {
+                Snackbar.make(view, "Ошибка: некорректное значение buttonText", Snackbar.LENGTH_SHORT).show()
+            }
         }
     }
 }
