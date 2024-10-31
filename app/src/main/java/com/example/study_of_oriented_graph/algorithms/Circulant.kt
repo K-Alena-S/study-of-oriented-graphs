@@ -40,7 +40,7 @@ class Circulant(private val N: Int, private val col: Collection, private val dis
                 matrix[i][(j + 1) % N] = matrix[i - 1][j]
             }
         }
-        val coc = ClassifCirc(N, matrix, col)
+        val coc = ClassifCirc(N, matrix, col, tuple)
 
         for (i in 1 until (N/2+1))
             str += "${matrix[0][i]} "

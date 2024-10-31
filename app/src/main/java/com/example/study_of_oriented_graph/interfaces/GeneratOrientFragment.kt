@@ -43,6 +43,7 @@ class GeneratOrientFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val tableLayout: TableLayout = view.findViewById(R.id.tableLayout)
+
         val textName: TextView = view.findViewById(R.id.text_name)
 
         selectedItems = arguments?.getIntegerArrayList("selectedItems")
@@ -72,6 +73,11 @@ class GeneratOrientFragment : Fragment() {
 
         binding.copy.setOnClickListener {
             copyTableDataToClipboard(tableLayout, requireContext())
+        }
+
+        binding.addVectors.setOnClickListener {
+            val tableVector: TableLayout = view.findViewById(R.id.tableVector)
+            createTableVectors(tableVector, requireContext(), collection)
         }
     }
 
@@ -185,6 +191,28 @@ class GeneratOrientFragment : Fragment() {
                     )
                 }
             }
+        }
+    }
+
+    private fun createTableVectors(tableVector: TableLayout, context: Context, col: Collection) {
+        tableVector.removeAllViews()
+
+        // Добавляем заголовки в таблицу
+        val headerRow = TableRow(context)
+        for (i in 1..col.getStrList().size)
+            headerRow.addView(createTextView("$i"))
+        tableVector.addView(headerRow)
+
+        val maxRows = col.getVector(0).size
+
+        for (row in 0 .. maxRows) {
+            val tableRow = TableRow(context)
+            for (k in 0 until col.getList().size) {
+                val vector = col.getVector(k)
+                val textView = createTextView(if (row < vector.size) vector[row] else "") // Handle cases where vectors have different sizes
+                tableRow.addView(textView)
+            }
+            tableVector.addView(tableRow)
         }
     }
 

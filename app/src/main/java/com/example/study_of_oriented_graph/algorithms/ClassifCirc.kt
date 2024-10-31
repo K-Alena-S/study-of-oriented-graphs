@@ -1,6 +1,8 @@
 package com.example.study_of_oriented_graph.algorithms
 
-class ClassifCirc(N: Int, graph: Array<IntArray>, col: Collection) {
+import java.util.Arrays
+
+class ClassifCirc(N: Int, graph: Array<IntArray>, col: Collection, tuple: IntArray) {
 
     private var classgraph: Int = 0
     private var resId: String = ""
@@ -16,6 +18,7 @@ class ClassifCirc(N: Int, graph: Array<IntArray>, col: Collection) {
         for (i in col.getStrList()) {
             if (resId.equals(i, ignoreCase = true)) {
                 classgraph = n;
+                col.setVector(n, Arrays.toString(tuple))
                 cherche = false
                 break
             }
@@ -26,6 +29,7 @@ class ClassifCirc(N: Int, graph: Array<IntArray>, col: Collection) {
             classgraph = col.getStrList().size
             col.setList(graph)
             col.setStrList(resId)
+            col.setVector(n, Arrays.toString(tuple))
         }
     }
 
