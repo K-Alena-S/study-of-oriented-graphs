@@ -1,5 +1,7 @@
 package com.example.study_of_oriented_graph.algorithms
 
+import java.io.Serializable
+
 interface CollectionInterface {
     fun setStrList(str: String)
     fun getStrList(): List<String>
@@ -9,7 +11,7 @@ interface CollectionInterface {
     fun getVector(k: Int): List<String>
 }
 
-class Collection : CollectionInterface {
+class Collection : CollectionInterface, Serializable {
     private val graphList: MutableList<Array<IntArray>> = mutableListOf()
     private val strList: MutableList<String> = mutableListOf()
     private val vectorListList: MutableList<MutableList<String>> = mutableListOf()

@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment
 import com.example.study_of_oriented_graph.MainActivity
 import com.example.study_of_oriented_graph.R
 import com.example.study_of_oriented_graph.algorithms.AntiContours
-import com.example.study_of_oriented_graph.algorithms.Circulant
 import com.example.study_of_oriented_graph.algorithms.Collection
 import com.example.study_of_oriented_graph.databinding.FragmentGeneratOrientBinding
 import com.google.android.material.snackbar.Snackbar
@@ -34,7 +33,6 @@ class GeneratOrientFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentGeneratOrientBinding.inflate(inflater, container, false)
-        selectedItems = arguments?.getIntegerArrayList("selectedItems")
 
         return binding.root
     }
@@ -47,13 +45,15 @@ class GeneratOrientFragment : Fragment() {
         val textName: TextView = view.findViewById(R.id.text_name)
 
         selectedItems = arguments?.getIntegerArrayList("selectedItems")
-        val buttonInt = arguments?.getInt("buttonInt")
+        val buttonInt = arguments?.getInt("buttonInt")!!
 
         textName.text = "Вершин $buttonInt, дистанции $selectedItems"
 
-        val collection = Collection()
+        var collection = Collection()
 
-        Circulant(buttonInt!!, collection, selectedItems!!)
+        arguments?.let {
+            collection = it.getSerializable("collection_key") as Collection
+        }
 
         var antiCon: MutableList<IntArray> = mutableListOf()
         addingTable(tableLayout, buttonInt, collection, antiCon)
@@ -65,7 +65,6 @@ class GeneratOrientFragment : Fragment() {
                 val cs = AntiContours(collection.getList().get(i), buttonInt)
                 val anticontour = cs.getAntiContAll()
                 antiCon.add(anticontour)
-
             }
             addingTable(tableLayout, buttonInt, collection, antiCon)
             isAddAnticont = false
@@ -118,7 +117,10 @@ class GeneratOrientFragment : Fragment() {
                 count++
             }
         }
+        extremeValuesInColor(tableLayout, buttonInt)
+    }
 
+    private fun extremeValuesInColor(tableLayout: TableLayout,buttonInt: Int ) {
         val columnCount = buttonInt - 2
         val rowCount = tableLayout.childCount // Получаем количество строк
 
