@@ -1,10 +1,10 @@
 package com.example.study_of_oriented_graph.interfaces
 
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,7 +22,6 @@ class FourthTwoFragment : Fragment()  {
 
     private var _binding: FragmentFourthTwoBinding? = null
     private val binding get() = _binding!!
-    private lateinit var progressDialog: ProgressDialog
     private val collection : Collection = Collection()
 
     override fun onCreateView(
@@ -66,22 +65,23 @@ class FourthTwoFragment : Fragment()  {
             }
             bundle.putIntegerArrayList("selectedItems", ArrayList(selectedItems))
 
-            progressDialog = ProgressDialog(context)
-            progressDialog.setMessage("Пожалуйста, подождите...")
-            progressDialog.setCancelable(false)
-            progressDialog.show()
+            // Получить ссылку на ProgressBar
+            val progressBar: ProgressBar = view.findViewById(R.id.progressBar)
+
+            // Установить видимость ProgressBar на видимую
+            progressBar.visibility = View.VISIBLE
 
             // Запуск навигации в отдельном потоке, чтобы не блокировать UI
             CoroutineScope(Dispatchers.IO).launch {
-                //  Здесь выполняется любая дополнительная работа перед навигацией
                 if (buttonInt != null) {
-                    Circulant(buttonInt, collection, ArrayList(selectedItems))
+                    Circulant(buttonInt, collection, ArrayList(selectedItems), progressBar)
                 }
                 bundle.putSerializable("collection_key", collection)
 
                 withContext(Dispatchers.Main) {
+                    // Скрыть ProgressBar после завершения работы
+                    progressBar.visibility = View.GONE
                     findNavController().navigate(R.id.action_FourthTwoFragment_to_GeneratOrientFragment, bundle)
-                    progressDialog.dismiss()
                 }
             }
         }

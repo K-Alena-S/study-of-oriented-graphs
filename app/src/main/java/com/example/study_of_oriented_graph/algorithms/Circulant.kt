@@ -1,6 +1,10 @@
 package com.example.study_of_oriented_graph.algorithms
 
-class Circulant(private val N: Int, private val col: Collection, private val dist: ArrayList<Int>) {
+import android.widget.ProgressBar
+
+class Circulant(private val N: Int, private val col: Collection, private val dist: ArrayList<Int>,
+                private var progressBar: ProgressBar
+) {
 
     private val n: Int = dist.size
     private var num: Int = 0
@@ -12,12 +16,15 @@ class Circulant(private val N: Int, private val col: Collection, private val dis
 
         var str = (1 shl (n - 1))
 
+        val pros = 100 / str
+
         for (k in 0 until str) {
             if (cherche) {
                 matr(tuple)
                 num++
                 func(tuple, n - 1)
             }
+            onProgressUpdate(pros*(1+k))
         }
     }
 
@@ -58,5 +65,9 @@ class Circulant(private val N: Int, private val col: Collection, private val dis
         if (tuple[count] == -1 && count > 0) {
             func(tuple, count - 1)
         }
+    }
+
+    fun onProgressUpdate(progress: Int) {
+        progressBar.progress = progress
     }
 }
