@@ -22,7 +22,6 @@ class FourthTwoFragment : Fragment()  {
 
     private var _binding: FragmentFourthTwoBinding? = null
     private val binding get() = _binding!!
-    private val collection : Collection = Collection()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,6 +72,7 @@ class FourthTwoFragment : Fragment()  {
 
             // Запуск навигации в отдельном потоке, чтобы не блокировать UI
             CoroutineScope(Dispatchers.IO).launch {
+                val collection = Collection()
                 if (buttonInt != null) {
                     Circulant(buttonInt, collection, ArrayList(selectedItems), progressBar)
                 }
