@@ -18,6 +18,7 @@ import com.example.study_of_oriented_graph.MainActivity
 import com.example.study_of_oriented_graph.R
 import com.example.study_of_oriented_graph.algorithms.AntiContours
 import com.example.study_of_oriented_graph.algorithms.Collection
+import com.example.study_of_oriented_graph.algorithms.ContourTypeFourth
 import com.example.study_of_oriented_graph.databinding.FragmentGeneratOrientBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -77,6 +78,11 @@ class GeneratOrientFragment : Fragment() {
         binding.addVectors.setOnClickListener {
             val tableVector: TableLayout = view.findViewById(R.id.tableVector)
             createTableVectors(tableVector, requireContext(), collection)
+        }
+
+
+        binding.chercheDiv.setOnClickListener {
+            findDivisor(tableLayout, buttonInt - 1)
         }
     }
 
@@ -196,6 +202,47 @@ class GeneratOrientFragment : Fragment() {
         }
     }
 
+    private fun findDivisor(tableLayout: TableLayout, columnCount: Int) {
+        val gcds = IntArray(columnCount) { 0 } // Массив для хранения НОД для каждого столбца
+
+        // Вычисляем НОД для каждого столбца
+        for (col in 0 until columnCount) {
+            val valuesInColumn = mutableListOf<Int>()
+
+            // Извлекаем значения из каждой строки для текущего столбца
+            for (row in 1 until tableLayout.childCount) { // Пропускаем заголовок
+                val tableRow = tableLayout.getChildAt(row) as TableRow
+                val value = (tableRow.getChildAt(col) as TextView).text.toString().toInt()
+                valuesInColumn.add(value)
+            }
+
+            // Находим НОД для значений в этом столбце
+            gcds[col] = findGCD(valuesInColumn)
+        }
+
+        // Добавляем новую строку в таблицу с результатами
+        val resultRow = TableRow(context)
+        resultRow.addView(createTextView("НОД")) // Напоминаем, что это строка с НОД
+
+        for (gcd in 1 until gcds.size) {
+            resultRow.addView(createTextView(gcds[gcd].toString()))
+        }
+
+        tableLayout.addView(resultRow) // Добавляем строку результатов в таблицу
+    }
+
+    // Функция для нахождения НОД
+    private fun findGCD(numbers: List<Int>): Int {
+        if (numbers.isEmpty()) return 0
+        return numbers.reduce { acc, number -> gcd(acc, number) }
+    }
+
+    // Функция для нахождения НОД
+    private fun gcd(a: Int, b: Int): Int {
+        return if (b == 0) a else gcd(b, a % b)
+    }
+
+
     private fun createTableVectors(tableVector: TableLayout, context: Context, col: Collection) {
         tableVector.removeAllViews()
 
@@ -211,7 +258,7 @@ class GeneratOrientFragment : Fragment() {
             val tableRow = TableRow(context)
             for (k in 0 until col.getList().size) {
                 val vector = col.getVector(k)
-                val textView = createTextView(if (row < vector.size) vector[row] else "") // Handle cases where vectors have different sizes
+                val textView = createTextView(if (row < vector.size) vector[row] else "")
                 tableRow.addView(textView)
             }
             tableVector.addView(tableRow)
