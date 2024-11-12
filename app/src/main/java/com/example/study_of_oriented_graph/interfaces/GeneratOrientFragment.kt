@@ -18,7 +18,6 @@ import com.example.study_of_oriented_graph.MainActivity
 import com.example.study_of_oriented_graph.R
 import com.example.study_of_oriented_graph.algorithms.AntiContours
 import com.example.study_of_oriented_graph.algorithms.Collection
-import com.example.study_of_oriented_graph.algorithms.ContourTypeFourth
 import com.example.study_of_oriented_graph.algorithms.ContourTypeThird
 import com.example.study_of_oriented_graph.databinding.FragmentGeneratOrientBinding
 import com.google.android.material.snackbar.Snackbar
@@ -88,17 +87,8 @@ class GeneratOrientFragment : Fragment() {
 
         binding.thirdFragment.setOnClickListener {
             val ctt = ContourTypeThird(collection, buttonInt)
-
-            var typestr = ctt.components.size.toString() + "\n\n"
-
-            for (k in 0 until collection.getList().size) {
-                for (i in ctt.getTypesFrag(k)) {
-                    typestr += i.toString() + " "
-                }
-                typestr += " \n"
-            }
-
-            textName.text = typestr
+            val tableTypesThird: TableLayout = view.findViewById(R.id.tableTypesThird)
+            createTableTypesThird(tableTypesThird, requireContext(), ctt)
         }
     }
 
@@ -327,6 +317,29 @@ class GeneratOrientFragment : Fragment() {
                 }
                 maxCell.setBackgroundColor(lightColor)
             }
+        }
+    }
+
+    fun createTableTypesThird(tableTypes: TableLayout, context: Context, ctt: ContourTypeThird) {
+        tableTypes.removeAllViews()
+
+        val headerRow = TableRow(context)
+        headerRow.addView(createTextView("Кл\\тип"))
+        for (i in 0 until ctt.typesFrag[0].size-2)
+            headerRow.addView(createTextView("$i"))
+
+        headerRow.addView(createTextView("a"))
+        headerRow.addView(createTextView("b"))
+        tableTypes.addView(headerRow)
+
+        for (k in 0 until ctt.typesFrag.size) {
+            val dataRow = TableRow(context)
+            dataRow.addView(createTextView((k+1).toString()))
+
+            for (a in ctt.getTypesFrag(k))
+                dataRow.addView(createTextView(a.toString()))
+
+            tableTypes.addView(dataRow)
         }
     }
 

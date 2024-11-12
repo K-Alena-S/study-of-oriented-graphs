@@ -45,6 +45,20 @@
             </TableLayout>
         </HorizontalScrollView>
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+            <TableLayout
+                android:id="@+id/tableTypesThird"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="5dp"
+                android:showDividers="middle">
+            </TableLayout>
+        </HorizontalScrollView>
+
         <Button
             android:id="@+id/copy"
             android:layout_width="wrap_content"
