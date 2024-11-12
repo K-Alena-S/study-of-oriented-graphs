@@ -73,7 +73,8 @@ class ContourTypeThird (private val col: Collection, private val N: Int) {
                     else array[6]++
                 }
             }
-            typesFrag.add(array.copyOf())
+
         }
+        typesFrag.add(array.copyOf())
     }
 }
