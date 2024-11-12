@@ -19,6 +19,7 @@ import com.example.study_of_oriented_graph.R
 import com.example.study_of_oriented_graph.algorithms.AntiContours
 import com.example.study_of_oriented_graph.algorithms.Collection
 import com.example.study_of_oriented_graph.algorithms.ContourTypeFourth
+import com.example.study_of_oriented_graph.algorithms.ContourTypeThird
 import com.example.study_of_oriented_graph.databinding.FragmentGeneratOrientBinding
 import com.google.android.material.snackbar.Snackbar
 
@@ -83,6 +84,21 @@ class GeneratOrientFragment : Fragment() {
 
         binding.chercheDiv.setOnClickListener {
             findDivisor(tableLayout, buttonInt - 1)
+        }
+
+        binding.thirdFragment.setOnClickListener {
+            val ctt = ContourTypeThird(collection, buttonInt)
+
+            var typestr = ctt.components.size.toString() + "\n\n"
+
+            for (k in 0 until collection.getList().size) {
+                for (i in ctt.getTypesFrag(k)) {
+                    typestr += i.toString() + " "
+                }
+                typestr += " \n"
+            }
+
+            textName.text = typestr
         }
     }
 
