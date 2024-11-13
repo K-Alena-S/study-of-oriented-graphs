@@ -6,24 +6,33 @@
     tools:context=".interfaces.GeneratOrientFragment">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="16sp"
-            android:text=""/>
+            android:text=""
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/name_table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text=""
+            android:textSize="16sp" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TableLayout
                 android:id="@+id/tableLayout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:divider="@android:color/darker_gray"
                 android:dividerHeight="5dp"
@@ -31,13 +40,22 @@
             </TableLayout>
         </HorizontalScrollView>
 
+        <TextView
+            android:id="@+id/name_table_vector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text=""
+            android:textSize="16sp" />
+
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp">
+
             <TableLayout
                 android:id="@+id/tableVector"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:divider="@android:color/darker_gray"
                 android:dividerHeight="5dp"
@@ -45,58 +63,88 @@
             </TableLayout>
         </HorizontalScrollView>
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/name_table_types"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
-            <TableLayout
-                android:id="@+id/tableTypesThird"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@android:color/darker_gray"
-                android:dividerHeight="5dp"
-                android:showDividers="middle">
-            </TableLayout>
-        </HorizontalScrollView>
+            android:layout_marginTop="16dp"
+            android:text=""
+            android:textSize="16sp" />
+
+        <TableLayout
+            android:id="@+id/tableTypesThird"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="5dp"
+            android:showDividers="middle">
+        </TableLayout>
 
         <Button
             android:id="@+id/copy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:text="Скопировать таблицу" />
+            android:text="Скопировать таблицу"
+            android:textSize="18sp" />
 
-        <Button
+        <ToggleButton
             android:id="@+id/add_anticont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:text="Добавить антиконтуры" />
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:paddingStart="22dp"
+            android:paddingTop="0dp"
+            android:paddingEnd="22dp"
+            android:paddingBottom="0dp"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textOff="Добавить антиконтуры"
+            android:textOn="Убрать антиконтуры"
+            android:textSize="18sp" />
 
-        <Button
+        <ToggleButton
             android:id="@+id/add_vectors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:text="Добавить таблицу кортежей" />
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:paddingStart="22dp"
+            android:paddingTop="0dp"
+            android:paddingEnd="22dp"
+            android:paddingBottom="0dp"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textOff="Добавить таблицу кортежей"
+            android:textOn="Убрать таблицу кортежей"
+            android:textSize="18sp" />
+
+        <ToggleButton
+            android:id="@+id/third_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:paddingStart="22dp"
+            android:paddingTop="0dp"
+            android:paddingEnd="22dp"
+            android:paddingBottom="0dp"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textOff="Добавить 3 фрагменты"
+            android:textOn="Убрать 3 фрагменты"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/cherche_div"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:text="Найти НОД" />
-
-        <Button
-            android:id="@+id/third_fragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:text="Добавить 3 фрагменты" />
+            android:text="Найти НОД"
+            android:textSize="18sp" />
     </LinearLayout>
 </ScrollView>

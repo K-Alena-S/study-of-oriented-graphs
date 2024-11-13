@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -29,6 +30,10 @@ class GeneratOrientFragment : Fragment() {
     private val binding get() = _binding!!
     private var isAddAnticont: Boolean = false
 
+    private var isTableVisible: Boolean = false
+    private var isTableVisibleVector: Boolean = false
+    private var isTableVisibleThird: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,10 +43,23 @@ class GeneratOrientFragment : Fragment() {
         return binding.root
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        // Сохранение данных
+        outState.putBoolean("tableVisible", isTableVisible)
+        outState.putBoolean("tableVisibleVector", isTableVisibleVector)
+        outState.putBoolean("tableVisibleThird", isTableVisibleThird)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val tableLayout: TableLayout = view.findViewById(R.id.tableLayout)
+        tableLayout.visibility = if (isTableVisible) View.VISIBLE else View.GONE
+
+        savedInstanceState?.let {
+            isTableVisible = it.getBoolean("tableVisible", false)
+        }
 
         val textName: TextView = view.findViewById(R.id.text_name)
 
@@ -59,9 +77,21 @@ class GeneratOrientFragment : Fragment() {
         var antiCon: MutableList<IntArray> = mutableListOf()
         addingTable(tableLayout, buttonInt, collection, antiCon)
 
+        val nameTableCont: TextView = view.findViewById(R.id.name_table)
+        nameTableCont.text = "Таблица контуров"
+
         binding.addAnticont.setOnClickListener {
             antiCon.clear()
-            isAddAnticont = true
+            isTableVisible = !isTableVisible
+            isAddAnticont = isTableVisible
+
+            if (isTableVisible) {
+                nameTableCont.text = "Таблица контуров и антиконтуров"
+
+            }
+            else {
+                nameTableCont.text = "Таблица контуров"
+            }
             for (i in 0..collection.getList().size - 1) {
                 val cs = AntiContours(collection.getList().get(i), buttonInt)
                 val anticontour = cs.getAntiContAll()
@@ -75,20 +105,47 @@ class GeneratOrientFragment : Fragment() {
             copyTableDataToClipboard(tableLayout, requireContext())
         }
 
-        binding.addVectors.setOnClickListener {
-            val tableVector: TableLayout = view.findViewById(R.id.tableVector)
-            createTableVectors(tableVector, requireContext(), collection)
+        val tableVector: TableLayout = view.findViewById(R.id.tableVector)
+        tableVector.visibility = if (isTableVisibleVector) View.VISIBLE else View.GONE
+
+        savedInstanceState?.let {
+            isTableVisibleVector = it.getBoolean("tableVisibleVector", false)
         }
 
+        binding.addVectors.setOnClickListener {
+            isTableVisibleVector = !isTableVisibleVector
+            val nameTable: TextView = view.findViewById(R.id.name_table_vector)
+            if (isTableVisibleVector) {
+                nameTable.text = "Таблица кортежей"
+                createTableVectors(tableVector, requireContext(), collection)
+            } else {
+                nameTable.text = ""
+                tableVector.removeAllViews()
+            }
+        }
 
         binding.chercheDiv.setOnClickListener {
             findDivisor(tableLayout, buttonInt - 1)
         }
 
+        val tableTypesThird: TableLayout = view.findViewById(R.id.tableTypesThird)
+        tableTypesThird.visibility = if (isTableVisibleThird) View.VISIBLE else View.GONE
+
+        savedInstanceState?.let {
+            isTableVisibleThird = it.getBoolean("tableVisibleThird", false)
+        }
+
         binding.thirdFragment.setOnClickListener {
-            val ctt = ContourTypeThird(collection, buttonInt)
-            val tableTypesThird: TableLayout = view.findViewById(R.id.tableTypesThird)
-            createTableTypesThird(tableTypesThird, requireContext(), ctt)
+            isTableVisibleThird = !isTableVisibleThird
+            val nameTable: TextView = view.findViewById(R.id.name_table_types)
+            if (isTableVisibleThird) {
+                nameTable.text = "Таблица типов 3 фрагментов"
+                val ctt = ContourTypeThird(collection, buttonInt)
+                createTableTypesThird(tableTypesThird, requireContext(), ctt)
+            } else {
+                nameTable.text = ""
+                tableTypesThird.removeAllViews()
+            }
         }
     }
 
@@ -130,6 +187,7 @@ class GeneratOrientFragment : Fragment() {
             }
         }
         extremeValuesInColor(tableLayout, buttonInt)
+        tableLayout.visibility = View.VISIBLE
     }
 
     private fun extremeValuesInColor(tableLayout: TableLayout,buttonInt: Int ) {
@@ -269,6 +327,7 @@ class GeneratOrientFragment : Fragment() {
             }
             tableVector.addView(tableRow)
         }
+        tableVector.visibility = View.VISIBLE
     }
 
     private fun copyTableDataToClipboard(tableLayout: TableLayout, context: Context) {
@@ -341,6 +400,7 @@ class GeneratOrientFragment : Fragment() {
 
             tableTypes.addView(dataRow)
         }
+        tableTypes.visibility = View.VISIBLE
     }
 
     // Функция для создания TextView
