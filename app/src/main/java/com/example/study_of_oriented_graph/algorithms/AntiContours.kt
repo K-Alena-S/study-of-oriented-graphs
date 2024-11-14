@@ -30,7 +30,11 @@ class AntiContours(private val graphArray: Array<IntArray>, private val contourE
     }
 
     fun getAntiContAll(): IntArray {
-        return contour
+        val anticont = IntArray(contour.size)
+        for (k in contour.indices) {
+            anticont[k] = contour[k] / 2
+        }
+        return anticont
     }
 
     private fun cont(graphArray: Array<IntArray>, contour: IntArray, vertex: IntArray, a: Int, n: Int, k: Int, or: Int) {
