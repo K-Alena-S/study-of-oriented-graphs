@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import com.example.study_of_oriented_graph.databinding.ActivityMainBinding
+import com.example.study_of_oriented_graph.interfaces.ResourcesFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +41,14 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             R.id.info -> {
                 showInfoDialog()
+                true
+            }
+            R.id.res -> {
+                val fragment = ResourcesFragment()
+               supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment_content_main, fragment) // Замените на Ваш контейнер
+                    .addToBackStack(null) // Добавляем в стек, чтобы можно было вернуться
+                    .commit()
                 true
             }
             else -> super.onOptionsItemSelected(item)
