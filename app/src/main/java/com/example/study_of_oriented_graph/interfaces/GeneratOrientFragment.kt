@@ -54,6 +54,10 @@ class GeneratOrientFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val buttonInt = arguments?.getInt("buttonInt")!!
+        val contourBegin = arguments?.getInt("seekBar1") ?: 3
+        val contourEnd = arguments?.getInt("seekBar2") ?: buttonInt
+
         val tableLayout: TableLayout = view.findViewById(R.id.tableLayout)
         tableLayout.visibility = if (isTableVisible) View.VISIBLE else View.GONE
 
@@ -64,7 +68,6 @@ class GeneratOrientFragment : Fragment() {
         val textName: TextView = view.findViewById(R.id.text_name)
 
         selectedItems = arguments?.getIntegerArrayList("selectedItems")
-        val buttonInt = arguments?.getInt("buttonInt")!!
 
         textName.text = "Вершин $buttonInt, дистанции $selectedItems"
 
@@ -75,7 +78,7 @@ class GeneratOrientFragment : Fragment() {
         }
 
         var antiCon: MutableList<IntArray> = mutableListOf()
-        addingTable(tableLayout, buttonInt, collection, antiCon)
+        addingTable(tableLayout, buttonInt, collection, antiCon, contourBegin, contourEnd)
 
         val nameTableCont: TextView = view.findViewById(R.id.name_table)
         nameTableCont.text = "Таблица контуров"
@@ -87,7 +90,6 @@ class GeneratOrientFragment : Fragment() {
 
             if (isTableVisible) {
                 nameTableCont.text = "Таблица контуров и антиконтуров"
-
             }
             else {
                 nameTableCont.text = "Таблица контуров"
@@ -95,9 +97,10 @@ class GeneratOrientFragment : Fragment() {
             for (i in 0..collection.getList().size - 1) {
                 val cs = AntiContours(collection.getList().get(i), buttonInt)
                 val anticontour = cs.getAntiContAll()
-                antiCon.add(anticontour)
+                val newArray = anticontour.sliceArray(contourBegin-3 .. contourEnd-3)
+                antiCon.add(newArray)
             }
-            addingTable(tableLayout, buttonInt, collection, antiCon)
+            addingTable(tableLayout, buttonInt, collection, antiCon, contourBegin, contourEnd)
             isAddAnticont = false
         }
 
@@ -125,7 +128,7 @@ class GeneratOrientFragment : Fragment() {
         }
 
         binding.chercheDiv.setOnClickListener {
-            findDivisor(tableLayout, buttonInt - 1)
+            findDivisor(tableLayout, contourEnd - contourBegin + 1)
         }
 
         val tableTypesThird: TableLayout = view.findViewById(R.id.tableTypesThird)
@@ -150,13 +153,13 @@ class GeneratOrientFragment : Fragment() {
     }
 
     private fun addingTable(tableLayout: TableLayout, buttonInt: Int, col: Collection,
-                            antiCon: MutableList<IntArray>) {
+                            antiCon: MutableList<IntArray>, contourBegin: Int, contourEnd: Int) {
         tableLayout.removeAllViews()
 
         // Добавить заголовки таблицы
         val headerRow = TableRow(context)
         headerRow.addView(createTextView("Кл"))
-        for (i in 3..buttonInt)
+        for (i in contourBegin..contourEnd)
             headerRow.addView(createTextView("$i"))
         tableLayout.addView(headerRow)
 
@@ -172,26 +175,27 @@ class GeneratOrientFragment : Fragment() {
                 .map { it.toInt() } // Преобразуем каждую строку в Int
                 .toIntArray() // Преобразуем в IntArray
 
-            for (k in intArray)
-                dataRow.addView(createTextView(k.toString()))
+            for (k in contourBegin - 3 .. contourEnd - 3)
+                dataRow.addView(createTextView(intArray[k].toString()))
 
             tableLayout.addView(dataRow)
 
             if (isAddAnticont) {
                 val dataRowA = TableRow(context)
                 dataRowA.addView(createTextView((i.index + 1).toString()))
-                for (m in antiCon.get(count))
+                for (m in antiCon.get(count)) {
                     dataRowA.addView(createTextView(m.toString()))
+                }
                 tableLayout.addView(dataRowA)
                 count++
             }
         }
-        extremeValuesInColor(tableLayout, buttonInt)
+        extremeValuesInColor(tableLayout, contourBegin, contourEnd)
         tableLayout.visibility = View.VISIBLE
     }
 
-    private fun extremeValuesInColor(tableLayout: TableLayout,buttonInt: Int ) {
-        val columnCount = buttonInt - 2
+    private fun extremeValuesInColor(tableLayout: TableLayout, contourBegin: Int, contourEnd: Int) {
+        val columnCount = contourEnd - contourBegin + 1
         val rowCount = tableLayout.childCount // Получаем количество строк
 
         // Проходим по каждому столбцу
@@ -267,10 +271,10 @@ class GeneratOrientFragment : Fragment() {
     }
 
     private fun findDivisor(tableLayout: TableLayout, columnCount: Int) {
-        val gcds = IntArray(columnCount) { 0 } // Массив для хранения НОД для каждого столбца
+        val gcds = IntArray(columnCount + 1) { 0 } // Массив для хранения НОД для каждого столбца
 
         // Вычисляем НОД для каждого столбца
-        for (col in 0 until columnCount) {
+        for (col in 0 .. columnCount) {
             val valuesInColumn = mutableListOf<Int>()
 
             // Извлекаем значения из каждой строки для текущего столбца

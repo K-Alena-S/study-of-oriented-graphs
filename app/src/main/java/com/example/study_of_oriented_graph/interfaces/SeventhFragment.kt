@@ -39,7 +39,7 @@ class SeventhFragment : Fragment() {
         val seekBar2ValueText: TextView = view.findViewById(R.id.seekBar2Value)
 
         // Получаем аргументы
-        val vertices = arguments?.getString("vertices")?.toIntOrNull() ?: 30
+        val vertices = arguments?.getString("vertices")?.toIntOrNull() ?: 5
         seekBar1.max = vertices
         seekBar2.max = vertices
 

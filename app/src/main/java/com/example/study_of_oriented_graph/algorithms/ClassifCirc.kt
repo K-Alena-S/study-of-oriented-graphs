@@ -2,14 +2,14 @@ package com.example.study_of_oriented_graph.algorithms
 
 import java.util.Arrays
 
-class ClassifCirc(N: Int, graph: Array<IntArray>, col: Collection, tuple: IntArray) {
+class ClassifCirc(graph: Array<IntArray>, col: Collection, tuple: IntArray, contourEnd: Int) {
 
     private var classgraph: Int = 0
     private var resId: String = ""
 
     init {
         val a = graph.map { it.clone() }.toTypedArray()
-        val cs = ContourString(a, N)
+        val cs = ContourString(a, contourEnd)
         resId = cs.getId()
 
         var cherche = true

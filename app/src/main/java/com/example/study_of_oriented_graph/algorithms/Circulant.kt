@@ -3,7 +3,7 @@ package com.example.study_of_oriented_graph.algorithms
 import android.widget.ProgressBar
 
 class Circulant(private val N: Int, private val col: Collection, private val dist: ArrayList<Int>,
-                private var progressBar: ProgressBar
+                private var progressBar: ProgressBar, private val contourEnd: Int
 ) {
 
     private val n: Int = dist.size
@@ -47,7 +47,7 @@ class Circulant(private val N: Int, private val col: Collection, private val dis
                 matrix[i][(j + 1) % N] = matrix[i - 1][j]
             }
         }
-        val coc = ClassifCirc(N, matrix, col, tuple)
+        val coc = ClassifCirc(matrix, col, tuple, contourEnd)
 
         for (i in 1 until (N/2+1))
             str += "${matrix[0][i]} "
