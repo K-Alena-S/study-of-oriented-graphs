@@ -14,9 +14,9 @@ class Circulant(private val N: Int, private val col: Collection, private val dis
     init {
         val tuple = IntArray(n) { -1 }
 
-        var str = (1 shl (n - 1))
+        val str = (1 shl (n - 1))
 
-        val pros = 100 / str
+        val pros = 1000 / str
 
         for (k in 0 until str) {
             if (cherche) {

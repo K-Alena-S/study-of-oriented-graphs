@@ -114,7 +114,7 @@
                 android:layout_gravity="center"
                 android:visibility="gone"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:max="100"
+                android:max="1000"
                 android:progress="0"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
